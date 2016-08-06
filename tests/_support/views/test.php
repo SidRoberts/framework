@@ -1,0 +1,1 @@
+<?php echo $abc; ?> <?php echo $def; ?>
