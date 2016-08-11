@@ -40,17 +40,7 @@ class ResponseTest extends \Codeception\TestCase\Test
 
 
 
-        $container = new Container();
-
-        $response = new Response();
-
-        $container->set("response", $response);
-
-
-
-        $returnHandler = new \Sid\Framework\Kernel\ReturnHandler\Response(
-            $container
-        );
+        $returnHandler = new \Sid\Framework\Kernel\ReturnHandler\Response();
 
         $returnedValue = $returnHandler->handle(
             $request,

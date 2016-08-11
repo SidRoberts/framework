@@ -81,7 +81,7 @@ class KernelTest extends \Codeception\TestCase\Test
 
 
         $kernel->addReturnHandler(
-            new \Sid\Framework\Kernel\ReturnHandler\Response($container)
+            new \Sid\Framework\Kernel\ReturnHandler\Response()
         );
 
 
@@ -90,10 +90,6 @@ class KernelTest extends \Codeception\TestCase\Test
             "/",
             "GET"
         );
-
-        $response = new Response();
-
-        $container->set("response", $response);
 
 
 
