@@ -32,30 +32,11 @@ class View
 
 
 
-    public function getVariable(string $name)
-    {
-        return $this->variables[$name];
-    }
-
-    public function setVariable(string $name, $value)
-    {
-        $this->variables[$name] = $value;
-    }
-
-
-
-    public function getVariables() : array
-    {
-        return $this->variables;
-    }
-
-
-
-    public function render(string $path) : string
+    public function render(string $path, array $variables) : string
     {
         return $this->engine->render(
             $path,
-            $this->variables
+            $variables
         );
     }
 }
