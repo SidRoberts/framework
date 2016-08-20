@@ -2,8 +2,10 @@
 
 namespace Sid\Framework\Router\Annotations;
 
-use \Sid\Framework\ConverterInterface;
-use \Sid\Framework\MiddlewareInterface;
+use Sid\Framework\ConverterInterface;
+use Sid\Framework\MiddlewareInterface;
+
+use InvalidArgumentException;
 
 /**
  * @Annotation
@@ -45,7 +47,7 @@ class Route
     public function __construct(array $values)
     {
         if (!isset($values["value"])) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 "Route Annotation must specify a URL."
             );
         }
@@ -136,7 +138,7 @@ class Route
     {
         foreach ($converters as $param => $converter) {
             if (!is_subclass_of($converter, ConverterInterface::class)) {
-                throw new \InvalidArgumentException(
+                throw new InvalidArgumentException(
                     "Converter must implement " . ConverterInterface::class
                 );
             }
@@ -149,7 +151,7 @@ class Route
     {
         foreach ($middlewares as $middleware) {
             if (!is_subclass_of($middleware, MiddlewareInterface::class)) {
-                throw new \InvalidArgumentException(
+                throw new InvalidArgumentException(
                     "Middleware must implement " . MiddlewareInterface::class
                 );
             }
