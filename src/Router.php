@@ -75,17 +75,19 @@ class Router
             $routeFound = (preg_match($pattern, $uri, $params) === 1);
 
             if ($routeFound) {
-                break;
+                if ($this->runMiddlewares($route, $uri)) {
+                    break;
+                } else {
+                    $routeFound = false;
+
+                    continue;
+                }
             }
         }
 
 
 
         if (!$routeFound) {
-            throw new RouteNotFoundException();
-        }
-
-        if (!$this->runMiddlewares($route, $uri)) {
             throw new RouteNotFoundException();
         }
 
