@@ -119,6 +119,10 @@ class Router
 
     protected function runMiddlewares(Route $route, string $uri) : bool
     {
+        $resolver = $this->container->getResolver();
+
+
+
         $routeAnnotation = $route->getRouteAnnotation();
 
         $middlewares = $routeAnnotation->getMiddlewares();
@@ -129,7 +133,7 @@ class Router
 
         foreach ($middlewares as $middleware) {
             $middlewareRunner->addMiddleware(
-                $this->container->typehintClass($middleware)
+                $resolver->typehintClass($middleware)
             );
         }
 
@@ -145,6 +149,10 @@ class Router
 
     protected function convertParams(Route $route, array $params) : array
     {
+        $resolver = $this->container->getResolver();
+
+
+
         $routeAnnotation = $route->getRouteAnnotation();
 
 
@@ -161,7 +169,7 @@ class Router
 
             $params[$key] = call_user_func_array(
                 [
-                    $this->container->typehintClass($converter),
+                    $resolver->typehintClass($converter),
                     "convert",
                 ],
                 [

@@ -34,7 +34,9 @@ class Dispatcher
 
 
 
-        $controller = $this->container->typehintClass($controllerName);
+        $resolver = $this->container->getResolver();
+
+        $controller = $resolver->typehintClass($controllerName);
 
 
 
