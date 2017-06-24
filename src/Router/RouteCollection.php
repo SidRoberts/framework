@@ -5,8 +5,6 @@ namespace Sid\Framework\Router;
 use ReflectionClass;
 use ReflectionMethod;
 
-use Sid\Container\Container;
-
 use Sid\Framework\Controller;
 
 use Sid\Framework\Dispatcher\Path;
