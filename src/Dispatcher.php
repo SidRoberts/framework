@@ -34,9 +34,7 @@ class Dispatcher
 
 
 
-        $resolver = $this->container->getResolver();
-
-        $controller = $resolver->typehintClass($controllerName);
+        $controller = $this->resolveController($controllerName);
 
 
 
@@ -49,5 +47,14 @@ class Dispatcher
         );
 
         return $returnedValue;
+    }
+
+    protected function resolveController(string $controllerName)
+    {
+        $resolver = $this->container->getResolver();
+
+        $controller = $resolver->typehintClass($controllerName);
+
+        return $controller;
     }
 }

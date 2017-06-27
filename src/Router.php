@@ -119,10 +119,6 @@ class Router
 
     protected function runMiddlewares(Route $route, string $uri) : bool
     {
-        $resolver = $this->container->getResolver();
-
-
-
         $routeAnnotation = $route->getRouteAnnotation();
 
         $middlewares = $routeAnnotation->getMiddlewares();
@@ -131,10 +127,10 @@ class Router
 
         $middlewareRunner = new MiddlewareRunner();
 
-        foreach ($middlewares as $middleware) {
-            $middlewareRunner->addMiddleware(
-                $resolver->typehintClass($middleware)
-            );
+        foreach ($middlewares as $middlewareName) {
+            $middleware = $this->resolveMiddleware($middlewareName);
+
+            $middlewareRunner->addMiddleware($middleware);
         }
 
         return $middlewareRunner->run(
@@ -145,14 +141,19 @@ class Router
         );
     }
 
+    protected function resolveMiddleware(string $middlewareName)
+    {
+        $resolver = $this->container->getResolver();
+
+        $middleware = $resolver->typehintClass($middlewareName);
+
+        return $middleware;
+    }
+
 
 
     protected function convertParams(Route $route, array $params) : array
     {
-        $resolver = $this->container->getResolver();
-
-
-
         $routeAnnotation = $route->getRouteAnnotation();
 
 
@@ -165,11 +166,13 @@ class Router
                 continue;
             }
 
-            $converter = $converters[$key];
+            $converterName = $converters[$key];
+
+            $converter = $this->resolveConverter($converterName);
 
             $params[$key] = call_user_func_array(
                 [
-                    $resolver->typehintClass($converter),
+                    $converter,
                     "convert",
                 ],
                 [
@@ -179,5 +182,14 @@ class Router
         }
 
         return $params;
+    }
+
+    protected function resolveConverter(string $converterName)
+    {
+        $resolver = $this->container->getResolver();
+
+        $converter = $resolver->typehintClass($converterName);
+
+        return $converter;
     }
 }
