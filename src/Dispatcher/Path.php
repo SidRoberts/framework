@@ -24,14 +24,21 @@ class Path
         // If the controller can't be loaded, we throw an exception.
         if (!class_exists($controller)) {
             throw new ControllerNotFoundException(
-                $controller . " controller class does not exist."
+                sprintf(
+                    "%s controller class does not exist.",
+                    $controller
+                )
             );
         }
 
         // Check if the method exists in the controller
         if (!method_exists($controller, $action)) {
             throw new ActionNotFoundException(
-                "'" . $controller . "::" . $action . "()' was not found."
+                sprintf(
+                    "'%s::%s()' was not found.",
+                    $controller,
+                    $action
+                )
             );
         }
 

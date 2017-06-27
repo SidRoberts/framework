@@ -139,7 +139,10 @@ class Route
         foreach ($converters as $param => $converter) {
             if (!is_subclass_of($converter, ConverterInterface::class)) {
                 throw new InvalidArgumentException(
-                    "Converter must implement " . ConverterInterface::class
+                    sprintf(
+                        "Converter must implement %s",
+                        ConverterInterface::class
+                    )
                 );
             }
 
@@ -152,7 +155,10 @@ class Route
         foreach ($middlewares as $middleware) {
             if (!is_subclass_of($middleware, MiddlewareInterface::class)) {
                 throw new InvalidArgumentException(
-                    "Middleware must implement " . MiddlewareInterface::class
+                    sprintf(
+                        "Middleware must implement %s",
+                        MiddlewareInterface::class
+                    )
                 );
             }
 
