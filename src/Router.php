@@ -2,8 +2,6 @@
 
 namespace Sid\Framework;
 
-use Sid\Container\Container;
-
 use Sid\Framework\Middleware\Runner as MiddlewareRunner;
 
 use Sid\Framework\Router\Annotations\Route as RouteAnnotation;
@@ -15,9 +13,9 @@ use Sid\Framework\Router\RouteCollection;
 class Router
 {
     /**
-     * @var Container
+     * @var ResolverInterface
      */
-    protected $container;
+    protected $resolver;
 
     /**
      * @var RouteCollection
@@ -26,9 +24,9 @@ class Router
 
 
 
-    public function __construct(Container $container, RouteCollection $routeCollection)
+    public function __construct(ResolverInterface $resolver, RouteCollection $routeCollection)
     {
-        $this->container       = $container;
+        $this->resolver        = $resolver;
         $this->routeCollection = $routeCollection;
     }
 
@@ -143,9 +141,7 @@ class Router
 
     protected function resolveMiddleware(string $middlewareName)
     {
-        $resolver = $this->container->getResolver();
-
-        $middleware = $resolver->typehintClass($middlewareName);
+        $middleware = $this->resolver->typehintClass($middlewareName);
 
         return $middleware;
     }
@@ -186,9 +182,7 @@ class Router
 
     protected function resolveConverter(string $converterName)
     {
-        $resolver = $this->container->getResolver();
-
-        $converter = $resolver->typehintClass($converterName);
+        $converter = $this->resolver->typehintClass($converterName);
 
         return $converter;
     }

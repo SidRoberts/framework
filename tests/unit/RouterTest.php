@@ -2,7 +2,9 @@
 
 namespace Sid\Framework\Test\Unit;
 
-use Sid\Container\Container;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+use Sid\Framework\Resolver;
 
 use Sid\Framework\Router;
 use Sid\Framework\Router\Route;
@@ -32,7 +34,9 @@ class RouterTest extends \Codeception\TestCase\Test
 
     public function testGetRouteCollection()
     {
-        $container = new Container();
+        $container = new ContainerBuilder();
+
+        $resolver = new Resolver($container);
 
 
 
@@ -42,7 +46,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
 
 
-        $router = new Router($container, $routeCollection);
+        $router = new Router($resolver, $routeCollection);
 
         $this->assertEquals(
             $routeCollection,
@@ -52,7 +56,9 @@ class RouterTest extends \Codeception\TestCase\Test
 
     public function testConverters()
     {
-        $container = new Container();
+        $container = new ContainerBuilder();
+
+        $resolver = new Resolver($container);
 
 
 
@@ -68,7 +74,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
 
 
-        $router = new Router($container, $routeCollection);
+        $router = new Router($resolver, $routeCollection);
 
         $match = $router->handle("/converter/double/123", "GET");
 
@@ -83,7 +89,9 @@ class RouterTest extends \Codeception\TestCase\Test
      */
     public function testMiddlewares($url, $shouldPass)
     {
-        $container = new Container();
+        $container = new ContainerBuilder();
+
+        $resolver = new Resolver($container);
 
 
 
@@ -99,7 +107,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
 
 
-        $router = new Router($container, $routeCollection);
+        $router = new Router($resolver, $routeCollection);
 
 
 
@@ -142,7 +150,9 @@ class RouterTest extends \Codeception\TestCase\Test
      */
     public function testRequirements($url, $shouldPass)
     {
-        $container = new Container();
+        $container = new ContainerBuilder();
+
+        $resolver = new Resolver($container);
 
 
 
@@ -158,7 +168,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
 
 
-        $router = new Router($container, $routeCollection);
+        $router = new Router($resolver, $routeCollection);
 
 
 
@@ -196,7 +206,9 @@ class RouterTest extends \Codeception\TestCase\Test
      */
     public function testRouteNotFoundException()
     {
-        $container = new Container();
+        $container = new ContainerBuilder();
+
+        $resolver = new Resolver($container);
 
 
 
@@ -206,14 +218,16 @@ class RouterTest extends \Codeception\TestCase\Test
 
 
 
-        $router = new Router($container, $routeCollection);
+        $router = new Router($resolver, $routeCollection);
 
         $router->handle("/this/is/a/route/that/doesnt/exist", "GET");
     }
 
     public function testHttpMethods()
     {
-        $container = new Container();
+        $container = new ContainerBuilder();
+
+        $resolver = new Resolver($container);
 
 
 
@@ -229,7 +243,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
 
 
-        $router = new Router($container, $routeCollection);
+        $router = new Router($resolver, $routeCollection);
 
 
 
@@ -252,7 +266,9 @@ class RouterTest extends \Codeception\TestCase\Test
 
     public function testGetRoutes()
     {
-        $container = new Container();
+        $container = new ContainerBuilder();
+
+        $resolver = new Resolver($container);
 
 
 
@@ -262,7 +278,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
 
 
-        $router = new Router($container, $routeCollection);
+        $router = new Router($resolver, $routeCollection);
 
 
         $this->assertEquals(

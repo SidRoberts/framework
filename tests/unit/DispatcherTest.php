@@ -2,10 +2,11 @@
 
 namespace Sid\Framework\Test\Unit;
 
-use Sid\Container\Container;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 use Sid\Framework\Dispatcher;
 use Sid\Framework\Dispatcher\Path;
+use Sid\Framework\Resolver;
 
 class DispatcherTest extends \Codeception\TestCase\Test
 {
@@ -26,9 +27,13 @@ class DispatcherTest extends \Codeception\TestCase\Test
 
     public function testSimpleDispatch()
     {
-        $container = new Container();
+        $container = new ContainerBuilder();
 
-        $dispatcher = new Dispatcher($container);
+        $resolver = new Resolver($container);
+
+
+
+        $dispatcher = new Dispatcher($resolver);
 
 
 
@@ -47,9 +52,13 @@ class DispatcherTest extends \Codeception\TestCase\Test
 
     public function testParams()
     {
-        $container = new Container();
+        $container = new ContainerBuilder();
 
-        $dispatcher = new Dispatcher($container);
+        $resolver = new Resolver($container);
+
+
+
+        $dispatcher = new Dispatcher($resolver);
 
 
 

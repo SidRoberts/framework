@@ -27,7 +27,7 @@
     "require": {
         "php": "~7.0",
 
-        "sidroberts/container": "~3.0",
+        "symfony/dependency-injection": "~3.3",
 
         "doctrine/annotations": "~1.2",
 

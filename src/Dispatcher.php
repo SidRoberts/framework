@@ -2,27 +2,25 @@
 
 namespace Sid\Framework;
 
-use Sid\Container\Container;
-
 use Sid\Framework\Dispatcher\Path;
 
 /**
  * Takes a Dispatcher\Path object, instantiates the controller and calls the
- * action method. It uses \Sid\Container\Container to typehint the controller
- * constructor and inject all sorts of lovely goodness.
+ * action method. It uses a Resolver to typehint the controller constructor and
+ * inject all sorts of lovely goodness.
  */
 class Dispatcher
 {
     /**
-     * @var Container
+     * @var ResolverInterface
      */
-    protected $container;
+    protected $resolver;
 
 
 
-    public function __construct(Container $container)
+    public function __construct(ResolverInterface $resolver)
     {
-        $this->container = $container;
+        $this->resolver = $resolver;
     }
 
 
@@ -51,9 +49,7 @@ class Dispatcher
 
     protected function resolveController(string $controllerName)
     {
-        $resolver = $this->container->getResolver();
-
-        $controller = $resolver->typehintClass($controllerName);
+        $controller = $this->resolver->typehintClass($controllerName);
 
         return $controller;
     }

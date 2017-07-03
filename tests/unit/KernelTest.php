@@ -2,10 +2,11 @@
 
 namespace Sid\Framework\Test\Unit;
 
-use Sid\Container\Container;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 use Sid\Framework\Kernel;
 use Sid\Framework\Dispatcher;
+use Sid\Framework\Resolver;
 use Sid\Framework\Router;
 use Sid\Framework\Router\RouteCollection;
 
@@ -18,7 +19,9 @@ class KernelTest extends \Codeception\TestCase\Test
 {
     public function testBasicHandle()
     {
-        $container = new Container();
+        $container = new ContainerBuilder();
+
+        $resolver = new Resolver($container);
 
 
 
@@ -34,8 +37,8 @@ class KernelTest extends \Codeception\TestCase\Test
 
 
 
-        $router = new Router($container, $routeCollection);
-        $dispatcher = new Dispatcher($container);
+        $router = new Router($resolver, $routeCollection);
+        $dispatcher = new Dispatcher($resolver);
 
         $kernel = new Kernel($router, $dispatcher);
 
@@ -58,7 +61,9 @@ class KernelTest extends \Codeception\TestCase\Test
 
     public function testReturnHandler()
     {
-        $container = new Container();
+        $container = new ContainerBuilder();
+
+        $resolver = new Resolver($container);
 
 
 
@@ -74,8 +79,8 @@ class KernelTest extends \Codeception\TestCase\Test
 
 
 
-        $router = new Router($container, $routeCollection);
-        $dispatcher = new Dispatcher($container);
+        $router = new Router($resolver, $routeCollection);
+        $dispatcher = new Dispatcher($resolver);
 
         $kernel = new Kernel($router, $dispatcher);
 
@@ -110,7 +115,9 @@ class KernelTest extends \Codeception\TestCase\Test
 
     public function testGetAndSetNotFoundPath()
     {
-        $container = new Container();
+        $container = new ContainerBuilder();
+
+        $resolver = new Resolver($container);
 
 
 
@@ -126,8 +133,8 @@ class KernelTest extends \Codeception\TestCase\Test
 
 
 
-        $router = new Router($container, $routeCollection);
-        $dispatcher = new Dispatcher($container);
+        $router = new Router($resolver, $routeCollection);
+        $dispatcher = new Dispatcher($resolver);
 
         $kernel = new Kernel($router, $dispatcher);
 
@@ -156,7 +163,9 @@ class KernelTest extends \Codeception\TestCase\Test
 
     public function testNotFoundPath()
     {
-        $container = new Container();
+        $container = new ContainerBuilder();
+
+        $resolver = new Resolver($container);
 
 
 
@@ -166,8 +175,8 @@ class KernelTest extends \Codeception\TestCase\Test
 
 
 
-        $router = new Router($container, $routeCollection);
-        $dispatcher = new Dispatcher($container);
+        $router = new Router($resolver, $routeCollection);
+        $dispatcher = new Dispatcher($resolver);
 
         $kernel = new Kernel($router, $dispatcher);
 
@@ -204,7 +213,9 @@ class KernelTest extends \Codeception\TestCase\Test
      */
     public function testRouteNotFoundException()
     {
-        $container = new Container();
+        $container = new ContainerBuilder();
+
+        $resolver = new Resolver($container);
 
 
 
@@ -214,8 +225,8 @@ class KernelTest extends \Codeception\TestCase\Test
 
 
 
-        $router = new Router($container, $routeCollection);
-        $dispatcher = new Dispatcher($container);
+        $router = new Router($resolver, $routeCollection);
+        $dispatcher = new Dispatcher($resolver);
 
         $kernel = new Kernel($router, $dispatcher);
 

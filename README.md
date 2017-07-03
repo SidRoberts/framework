@@ -19,8 +19,6 @@ composer require sidroberts/framework
 
 **A working example is coming soon.**
 
-This library relies on [sidroberts/container](https://github.com/sidroberts/container) to handle service location - it's highly recommended that you read up on how that library works first.
-
 This library can be divided into three components:
 * Kernel: couples Router and Dispatcher together. It is better able to deal with 404 errors and also adds Return Handlers.
 * Router: takes a URL and determines which action method should be executed.
