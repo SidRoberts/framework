@@ -52,6 +52,30 @@ class RouteCollectionTest extends \Codeception\TestCase\Test
         );
     }
 
+    public function testAddControllers()
+    {
+        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+
+        $routeCollection = new RouteCollection($annotations);
+
+        $this->assertEquals(
+            0,
+            count($routeCollection->getRoutes())
+        );
+
+        $routeCollection->addControllers(
+            [
+                \Controller\IndexController::class,
+                \Controller\ParametersController::class,
+            ]
+        );
+
+        $this->assertEquals(
+            4,
+            count($routeCollection->getRoutes())
+        );
+    }
+
     /**
      * @expectedException \Sid\Framework\Router\Exception\ControllerNotFoundException
      */

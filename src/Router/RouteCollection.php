@@ -84,4 +84,11 @@ class RouteCollection
             $this->routes[] = $route;
         }
     }
+
+    public function addControllers(array $controllers)
+    {
+        foreach ($controllers as $controller) {
+            $this->addController($controller);
+        }
+    }
 }
