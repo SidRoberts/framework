@@ -6,21 +6,6 @@ use Sid\Framework\Dispatcher\Path;
 
 class PathTest extends \Codeception\TestCase\Test
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
-    protected function _before()
-    {
-    }
-
-    protected function _after()
-    {
-    }
-
-
-
     public function testGetters()
     {
         $controller = \Controller\IndexController::class;

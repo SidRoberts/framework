@@ -16,22 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RouterTest extends \Codeception\TestCase\Test
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
-    protected function _before()
-    {
-        parent::_before();
-    }
-
-    protected function _after()
-    {
-    }
-
-
-
     public function testGetRouteCollection()
     {
         $container = new ContainerBuilder();

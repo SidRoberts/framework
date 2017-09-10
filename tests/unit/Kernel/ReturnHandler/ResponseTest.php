@@ -12,21 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 class ResponseTest extends \Codeception\TestCase\Test
 {
     /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
-    protected function _before()
-    {
-    }
-
-    protected function _after()
-    {
-    }
-
-
-
-    /**
      * @dataProvider provider
      */
     public function testHandle($startingValue, $expectedContent)

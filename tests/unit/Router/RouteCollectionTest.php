@@ -6,22 +6,6 @@ use Sid\Framework\Router\RouteCollection;
 
 class RouteCollectionTest extends \Codeception\TestCase\Test
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
-    protected function _before()
-    {
-        parent::_before();
-    }
-
-    protected function _after()
-    {
-    }
-
-
-
     public function testAddController()
     {
         $annotations = new \Doctrine\Common\Annotations\AnnotationReader();

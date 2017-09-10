@@ -9,21 +9,6 @@ use Sid\Framework\Dispatcher\Path;
 
 class RunnerTest extends \Codeception\TestCase\Test
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
-    protected function _before()
-    {
-    }
-
-    protected function _after()
-    {
-    }
-
-
-
     public function testGetters()
     {
         $runner = new Runner();

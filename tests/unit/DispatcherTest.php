@@ -10,21 +10,6 @@ use Sid\Framework\Resolver;
 
 class DispatcherTest extends \Codeception\TestCase\Test
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
-    protected function _before()
-    {
-    }
-
-    protected function _after()
-    {
-    }
-
-
-
     public function testSimpleDispatch()
     {
         $container = new ContainerBuilder();
