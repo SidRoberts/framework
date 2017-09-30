@@ -41,11 +41,11 @@ class Router
 
     public function handle(string $uri, string $method) : Match
     {
-        // Remove redundant slashes.
-        $uri = "/" . trim($uri, "/");
-
         // Remove parameters from URI.
         $uri = explode("?", $uri)[0];
+
+        // Remove redundant slashes.
+        $uri = "/" . trim($uri, "/");
 
 
 
