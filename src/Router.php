@@ -126,7 +126,7 @@ class Router
         $middlewareRunner = new MiddlewareRunner();
 
         foreach ($middlewares as $middlewareName) {
-            $middleware = $this->resolveMiddleware($middlewareName);
+            $middleware = $this->resolver->typehintClass($middlewareName);
 
             $middlewareRunner->addMiddleware($middleware);
         }
@@ -137,13 +137,6 @@ class Router
                 $route,
             ]
         );
-    }
-
-    protected function resolveMiddleware(string $middlewareName)
-    {
-        $middleware = $this->resolver->typehintClass($middlewareName);
-
-        return $middleware;
     }
 
 
@@ -164,7 +157,7 @@ class Router
 
             $converterName = $converters[$key];
 
-            $converter = $this->resolveConverter($converterName);
+            $converter = $this->resolver->typehintClass($converterName);
 
             $params[$key] = call_user_func_array(
                 [
@@ -178,12 +171,5 @@ class Router
         }
 
         return $params;
-    }
-
-    protected function resolveConverter(string $converterName)
-    {
-        $converter = $this->resolver->typehintClass($converterName);
-
-        return $converter;
     }
 }
