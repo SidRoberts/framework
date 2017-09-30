@@ -88,7 +88,13 @@ class Router
 
 
         if (!$routeFound) {
-            throw new RouteNotFoundException();
+            throw new RouteNotFoundException(
+                sprintf(
+                    "None of the routes match the path '%s %s'",
+                    $method,
+                    $uri
+                )
+            );
         }
 
 
