@@ -5,7 +5,7 @@ namespace Sid\Framework\Router;
 use ReflectionClass;
 use ReflectionMethod;
 
-use Sid\Framework\Controller;
+use Sid\Framework\ControllerInterface;
 
 use Sid\Framework\Dispatcher\Path;
 
@@ -49,7 +49,7 @@ class RouteCollection
             );
         }
 
-        if (!is_subclass_of($controller, Controller::class)) {
+        if (!is_subclass_of($controller, ControllerInterface::class)) {
             throw new NotAControllerException(
                 $controller
             );

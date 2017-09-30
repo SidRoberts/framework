@@ -10,7 +10,7 @@ use Sid\Framework\Router\Match;
 use Sid\Framework\Router\Route;
 use Sid\Framework\Router\RouteCollection;
 
-class Router
+class Router implements RouterInterface
 {
     /**
      * @var ResolverInterface

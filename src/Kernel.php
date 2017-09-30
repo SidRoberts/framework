@@ -10,15 +10,15 @@ use Sid\Framework\Router\Exception\RouteNotFoundException;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class Kernel
+class Kernel implements KernelInterface
 {
     /**
-     * @var Router
+     * @var RouterInterface
      */
     protected $router;
 
     /**
-     * @var Dispatcher
+     * @var DispatcherInterface
      */
     protected $dispatcher;
 
@@ -34,7 +34,7 @@ class Kernel
 
 
 
-    public function __construct(Router $router, Dispatcher $dispatcher)
+    public function __construct(RouterInterface $router, DispatcherInterface $dispatcher)
     {
         $this->router     = $router;
         $this->dispatcher = $dispatcher;

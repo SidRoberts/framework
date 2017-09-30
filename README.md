@@ -28,7 +28,7 @@ A key detail with this implementation is that, although it uses Symfony's HTTP R
 
 ### Controllers
 
-All controllers should extend `\Sid\Framework\Controller`. Specify what services you require in the constructor.
+All controllers should extend `\Sid\Framework\Controller` or implement `\Sid\Framework\ControllerInterface`. Specify what services you require in the constructor.
 
 Action methods do not require a suffix - you're free to call it however you want - but they must have a `\Sid\Framework\Router\Annotations\Route` annotation.
 

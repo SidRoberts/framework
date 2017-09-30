@@ -9,7 +9,7 @@ use Sid\Framework\Dispatcher\Path;
  * action method. It uses a Resolver to typehint the controller constructor and
  * inject all sorts of lovely goodness.
  */
-class Dispatcher
+class Dispatcher implements DispatcherInterface
 {
     /**
      * @var ResolverInterface

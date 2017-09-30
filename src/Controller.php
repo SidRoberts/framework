@@ -2,6 +2,6 @@
 
 namespace Sid\Framework;
 
-abstract class Controller
+abstract class Controller implements ControllerInterface
 {
 }
