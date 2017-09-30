@@ -2,7 +2,7 @@
 
 namespace Sid\Framework\Test\Unit;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Container;
 
 use Sid\Framework\Resolver;
 
@@ -18,7 +18,7 @@ class RouterTest extends \Codeception\TestCase\Test
 {
     public function testGetRouteCollection()
     {
-        $container = new ContainerBuilder();
+        $container = new Container();
 
         $resolver = new Resolver($container);
 
@@ -40,7 +40,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
     public function testConverters()
     {
-        $container = new ContainerBuilder();
+        $container = new Container();
 
         $resolver = new Resolver($container);
 
@@ -73,7 +73,7 @@ class RouterTest extends \Codeception\TestCase\Test
      */
     public function testMiddlewares($url, $shouldPass)
     {
-        $container = new ContainerBuilder();
+        $container = new Container();
 
         $resolver = new Resolver($container);
 
@@ -134,7 +134,7 @@ class RouterTest extends \Codeception\TestCase\Test
      */
     public function testRequirements($url, $shouldPass)
     {
-        $container = new ContainerBuilder();
+        $container = new Container();
 
         $resolver = new Resolver($container);
 
@@ -190,7 +190,7 @@ class RouterTest extends \Codeception\TestCase\Test
      */
     public function testRouteNotFoundException()
     {
-        $container = new ContainerBuilder();
+        $container = new Container();
 
         $resolver = new Resolver($container);
 
@@ -209,7 +209,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
     public function testHttpMethods()
     {
-        $container = new ContainerBuilder();
+        $container = new Container();
 
         $resolver = new Resolver($container);
 
@@ -250,7 +250,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
     public function testGetRoutes()
     {
-        $container = new ContainerBuilder();
+        $container = new Container();
 
         $resolver = new Resolver($container);
 

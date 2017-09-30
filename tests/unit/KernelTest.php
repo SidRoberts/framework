@@ -2,7 +2,7 @@
 
 namespace Sid\Framework\Test\Unit;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Container;
 
 use Sid\Framework\Kernel;
 use Sid\Framework\Dispatcher;
@@ -19,7 +19,7 @@ class KernelTest extends \Codeception\TestCase\Test
 {
     public function testBasicHandle()
     {
-        $container = new ContainerBuilder();
+        $container = new Container();
 
         $resolver = new Resolver($container);
 
@@ -61,7 +61,7 @@ class KernelTest extends \Codeception\TestCase\Test
 
     public function testReturnHandler()
     {
-        $container = new ContainerBuilder();
+        $container = new Container();
 
         $resolver = new Resolver($container);
 
@@ -115,7 +115,7 @@ class KernelTest extends \Codeception\TestCase\Test
 
     public function testGetAndSetNotFoundPath()
     {
-        $container = new ContainerBuilder();
+        $container = new Container();
 
         $resolver = new Resolver($container);
 
@@ -163,7 +163,7 @@ class KernelTest extends \Codeception\TestCase\Test
 
     public function testNotFoundPath()
     {
-        $container = new ContainerBuilder();
+        $container = new Container();
 
         $resolver = new Resolver($container);
 
@@ -213,7 +213,7 @@ class KernelTest extends \Codeception\TestCase\Test
      */
     public function testRouteNotFoundException()
     {
-        $container = new ContainerBuilder();
+        $container = new Container();
 
         $resolver = new Resolver($container);
 
