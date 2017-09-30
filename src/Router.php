@@ -165,15 +165,7 @@ class Router
 
             $converter = $this->resolver->typehintClass($converterName);
 
-            $params[$key] = call_user_func_array(
-                [
-                    $converter,
-                    "convert",
-                ],
-                [
-                    $value
-                ]
-            );
+            $params[$key] = $converter->convert($value);
         }
 
         return $params;
