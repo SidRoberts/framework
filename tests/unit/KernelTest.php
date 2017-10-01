@@ -51,61 +51,7 @@ class KernelTest extends \Codeception\TestCase\Test
 
 
 
-        $returnedValue = $kernel->handle($request);
-
-        $this->assertEquals(
-            "homepage",
-            $returnedValue
-        );
-    }
-
-    public function testReturnHandler()
-    {
-        $container = new Container();
-
-        $resolver = new Resolver($container);
-
-
-
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
-
-        $routeCollection = new RouteCollection($annotations);
-
-
-
-        $routeCollection->addController(
-            \Controller\IndexController::class
-        );
-
-
-
-        $router = new Router($resolver, $routeCollection);
-        $dispatcher = new Dispatcher($resolver);
-
-        $kernel = new Kernel($router, $dispatcher);
-
-
-        $kernel->addReturnHandler(
-            new \Sid\Framework\Kernel\ReturnHandler\Response()
-        );
-
-
-
-        $request = Request::create(
-            "/",
-            "GET"
-        );
-
-
-
         $response = $kernel->handle($request);
-
-
-
-        $this->assertInstanceof(
-            Response::class,
-            $response
-        );
 
         $this->assertEquals(
             "homepage",

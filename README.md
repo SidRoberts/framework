@@ -20,11 +20,9 @@ composer require sidroberts/framework
 **A working example is coming soon.**
 
 This library can be divided into three components:
-* Kernel: couples Router and Dispatcher together. It is better able to deal with 404 errors and also adds Return Handlers.
+* Kernel: couples Router and Dispatcher together. It is better able to deal with 404 errors and returns Symfony Response objects.
 * Router: takes a URL and determines which action method should be executed.
 * Dispatcher: executes the Controller code.
-
-A key detail with this implementation is that, although it uses Symfony's HTTP Request object, it doesn't require that Symfony HTTP Response objects should be returned. Instead, it allows the controllers to return whatever they want and, optionally, you can package that returned value by using Return Handlers to enforce a particular output (eg. Symfony Response, CLI exit codes).
 
 ### Controllers
 
@@ -278,19 +276,3 @@ public function something()
     //TODO
 }
 ```
-
-### Return Handlers
-
-Return Handlers are used as a way to standardise the Kernel output. Prepackaged are:
-- `\Sid\Framework\Kernel\ReturnHandler\Response` (Symfony HTTP Responses)
-- `\Sid\Framework\Kernel\ReturnHandler\ExitCode` (useful for CLI apps)
-
-They are not required and you can chain them together by adding multiple Return Handlers to the Kernel:
-
-```php
-$kernel->addReturnHandler(
-    new \Sid\Framework\Kernel\ReturnHandler\Response()
-);
-```
-
-To create your own, implement `\Sid\Framework\Kernel\ReturnHandlerInterface`.

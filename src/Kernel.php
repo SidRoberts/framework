@@ -2,13 +2,12 @@
 
 namespace Sid\Framework;
 
-use Sid\Framework\Kernel\ReturnHandlerInterface;
-
 use Sid\Framework\Dispatcher\Path;
 use Sid\Framework\Router\Match;
 use Sid\Framework\Router\Exception\RouteNotFoundException;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class Kernel implements KernelInterface
 {
@@ -26,11 +25,6 @@ class Kernel implements KernelInterface
      * @var Path|null
      */
     protected $notFoundPath = null;
-
-    /**
-     * @var array
-     */
-    protected $returnHandlers = [];
 
 
 
@@ -54,14 +48,7 @@ class Kernel implements KernelInterface
 
 
 
-    public function addReturnHandler(ReturnHandlerInterface $returnHandler)
-    {
-        $this->returnHandlers[] = $returnHandler;
-    }
-
-
-
-    public function handle(Request $request)
+    public function handle(Request $request) : Response
     {
         try {
             $match = $this->router->handle(
@@ -88,16 +75,18 @@ class Kernel implements KernelInterface
 
 
 
-        foreach ($this->returnHandlers as $returnHandler) {
-            $returnedValue = $returnHandler->handle(
-                $request,
-                $match->getPath(),
-                $returnedValue
-            );
+        if ($returnedValue instanceof Response) {
+            return $returnedValue;
         }
 
 
 
-        return $returnedValue;
+        $response = new Response();
+
+        $response->setContent(
+            $returnedValue
+        );
+
+        return $response;
     }
 }
