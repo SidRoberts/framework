@@ -51,10 +51,12 @@ class RunnerTest extends \Codeception\TestCase\Test
 
 
 
+        $uri = "/";
+
         $route = new Route(
             new RouteAnnotation(
                 [
-                    "value" => "/",
+                    "value" => $uri,
                 ]
             ),
             new Path(
@@ -68,10 +70,8 @@ class RunnerTest extends \Codeception\TestCase\Test
         $this->assertEquals(
             $expected,
             $runner->run(
-                [
-                    "/",
-                    $route
-                ]
+                $uri,
+                $route
             )
         );
     }

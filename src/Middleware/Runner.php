@@ -2,6 +2,7 @@
 
 namespace Sid\Framework\Middleware;
 
+use Sid\Framework\Router\Route;
 use Sid\Framework\MiddlewareInterface;
 
 class Runner
@@ -25,16 +26,10 @@ class Runner
 
 
 
-    public function run(array $parameters = []) : bool
+    public function run(string $uri, Route $route) : bool
     {
         foreach ($this->middlewares as $middleware) {
-            $success = call_user_func_array(
-                [
-                    $middleware,
-                    "middleware",
-                ],
-                $parameters
-            );
+            $success = $middleware->middleware($uri, $route);
 
             if (!$success) {
                 return false;

@@ -137,12 +137,7 @@ class Router implements RouterInterface
             $middlewareRunner->addMiddleware($middleware);
         }
 
-        return $middlewareRunner->run(
-            [
-                $uri,
-                $route,
-            ]
-        );
+        return $middlewareRunner->run($uri, $route);
     }
 
 
