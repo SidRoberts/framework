@@ -59,29 +59,20 @@ class Router implements RouterInterface
         foreach ($routes as $route) {
             $routeAnnotation = $route->getRouteAnnotation();
 
-
-
-            // Check if the current HTTP method is allowed by the route.
-            if ($routeAnnotation->getMethod() !== $method) {
-                continue;
-            }
-
-
-
             $pattern = $routeAnnotation->getCompiledPattern();
 
-            $routeFound = (preg_match($pattern, $uri, $params) === 1);
 
-            if (!$routeFound) {
-                continue;
-            }
 
-            if ($this->runMiddlewares($route, $uri)) {
+            $routeFound =
+                // Check if the current HTTP method is allowed by the route.
+                ($routeAnnotation->getMethod() === $method)
+                &&
+                (preg_match($pattern, $uri, $params) === 1)
+                &&
+                $this->runMiddlewares($route, $uri);
+
+            if ($routeFound) {
                 break;
-            } else {
-                $routeFound = false;
-
-                continue;
             }
         }
 
