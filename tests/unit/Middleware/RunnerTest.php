@@ -67,13 +67,9 @@ class RunnerTest extends \Codeception\TestCase\Test
 
 
 
-        $this->assertEquals(
-            $expected,
-            $runner->run(
-                $uri,
-                $route
-            )
-        );
+        $actual = $runner->run($uri, $route);
+
+        $this->assertEquals($expected, $actual);
     }
 
 
