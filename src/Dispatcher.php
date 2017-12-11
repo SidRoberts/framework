@@ -2,6 +2,8 @@
 
 namespace Sid\Framework;
 
+use Sid\ContainerResolver\ResolverInterface;
+
 use Sid\Framework\Dispatcher\Path;
 
 /**

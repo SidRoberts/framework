@@ -2,6 +2,8 @@
 
 namespace Sid\Framework;
 
+use Sid\ContainerResolver\ResolverInterface;
+
 use Sid\Framework\Middleware\Runner as MiddlewareRunner;
 
 use Sid\Framework\Router\Exception\RouteNotFoundException;

@@ -8,7 +8,7 @@ use Doctrine\Common\Annotations\AnnotationReader;
 
 use Symfony\Component\DependencyInjection\Container;
 
-use Sid\Framework\Resolver;
+use Sid\ContainerResolver\Resolver\Psr11 as Resolver;
 
 use Sid\Framework\Router;
 use Sid\Framework\Router\Route;

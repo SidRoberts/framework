@@ -6,9 +6,10 @@ use Codeception\TestCase\Test;
 
 use Symfony\Component\DependencyInjection\Container;
 
+use Sid\ContainerResolver\Resolver\Psr11 as Resolver;
+
 use Sid\Framework\Dispatcher;
 use Sid\Framework\Dispatcher\Path;
-use Sid\Framework\Resolver;
 use Sid\Framework\Parameters;
 
 class DispatcherTest extends Test
