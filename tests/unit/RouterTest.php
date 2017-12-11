@@ -68,7 +68,7 @@ class RouterTest extends Test
 
         $this->assertEquals(
             246,
-            $match->getParams()["i"]
+            $match->getParams()->get("i")
         );
     }
 

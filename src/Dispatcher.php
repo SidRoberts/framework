@@ -25,23 +25,21 @@ class Dispatcher implements DispatcherInterface
 
 
 
-    public function dispatch(Path $path, array $params = [])
+    public function dispatch(Path $path, Parameters $parameters)
     {
         $controllerName = $path->getController();
         $action         = $path->getAction();
 
 
 
-        $controller = $this->resolver->typehintClass($controllerName);
+        $controller = new $controllerName;
 
-
-
-        $returnedValue = call_user_func_array(
+        $returnedValue = $this->resolver->typehintMethod(
+            $controller,
+            $action,
             [
-                $controller,
-                $action,
-            ],
-            $params
+                "parameters" => $parameters,
+            ]
         );
 
         return $returnedValue;

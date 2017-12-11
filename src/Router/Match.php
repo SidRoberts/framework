@@ -3,6 +3,7 @@
 namespace Sid\Framework\Router;
 
 use Sid\Framework\Dispatcher\Path;
+use Sid\Framework\Parameters;
 
 class Match
 {
@@ -31,8 +32,8 @@ class Match
         return $this->path;
     }
 
-    public function getParams() : array
+    public function getParams() : Parameters
     {
-        return $this->params;
+        return new Parameters($this->params);
     }
 }

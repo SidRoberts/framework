@@ -26,43 +26,54 @@ This library can be divided into three components:
 
 ### Controllers
 
-All controllers should extend `\Sid\Framework\Controller` or implement `\Sid\Framework\ControllerInterface`. Specify what services you require in the constructor.
+All controllers should extend `\Sid\Framework\Controller` or implement `\Sid\Framework\ControllerInterface`. Specify what services you require in the method signature.
 
 Action methods do not require a suffix - you're free to call it however you want - but they must have a `\Sid\Framework\Router\Route\Uri` annotation.
 
 ```php
+use Auth;
+use Doctrine\ORM\EntityManager;
 use Sid\Framework\Router\Route\Uri;
 
 /**
  * @Uri("/this/is/your/url")
  */
-public function index()
+public function index(Auth $auth, EntityManager $doctrine)
 {
     //TODO
 }
 ```
 
-You can also create URLs with dynamic values by enclosing their identifier in curly brackets (eg. `{id}`). These values will become the parameters of the action method:
+You can also create URLs with dynamic values by enclosing their identifier in curly brackets (eg. `{id}`). These values are available from the `Sid\Framework\Parameters` object:
 
 ```php
+use Sid\Framework\Parameters;
 use Sid\Framework\Router\Route\Uri;
 
 /**
  * @Uri("/post/{id}")
  */
-public function viewSingle($id)
+public function viewSingle(Parameters $parameters)
 {
+    $id = $parameters->get("id");
+
     //TODO Do something with $id.
 }
 
 /**
  * @Uri("/something-crazy/{a}/{b}/{c}")
  */
-public function something($a, $b, $c)
+public function something(Parameters $parameters)
 {
+    $a = $parameters->get("a");
+    $b = $parameters->get("b");
+    $c = $parameters->get("c");
+
     //TODO Do something with $a, $b and $c.
 }
 ```
+
+The `$parameters` property can be anywhere in the method signature.
 
 You can also require that the parameters adhere to a certain regular expression. This example will match `/post/1`, `/post/2`, `/post/3` and so on but will not match something like `/post/abc`:
 
@@ -77,8 +88,10 @@ use Sid\Framework\Router\Route\Requirements;
  *     id="\d+"
  * )
  */
-public function viewSingle($id)
+public function viewSingle(Parameters $parameters)
 {
+    $id = $parameters->get("id");
+
     //TODO Do something with $id.
 }
 ```
@@ -114,7 +127,7 @@ By default, routes will only match `GET`.
 
 ### Converters
 
-Converters are particularly useful at pre-processing URL parameters - for example, converting an ID number into an actual object. Any Converters you create must implement `\Sid\Framework\ConverterInterface` and, like with Controllers, you can inject any services you require via the constructor.
+Converters are particularly useful at pre-processing URL parameters - for example, converting an ID number into an actual object. Any Converters you create must implement `\Sid\Framework\ConverterInterface` and you can inject any services you require via the constructor.
 
 ```php
 namespace Converter;
@@ -154,10 +167,9 @@ class PostConverter implements ConverterInterface
 
 By throwing `\Sid\Framework\Router\Exception\RouteNotFoundException`, you can trigger a 404 error. In the above example, if the Post object cannot be found in the database, this exception is thrown to avoid having to deal with in the action method.
 
-When using Converters, you can also typehint the action method to enforce the object type which is especially useful in testing and debugging:
-
 ```php
 use Post;
+use Sid\Framework\Parameters;
 use Sid\Framework\Router\Route\Uri;
 use Sid\Framework\Router\Route\Requirements;
 use Sid\Framework\Router\Route\Converters;
@@ -173,8 +185,13 @@ use Sid\Framework\Router\Route\Converters;
  *     post="Converter\PostConverter"
  * )
  */
-public function viewSingle(Post $post)
+public function viewSingle(Parameters $parameters)
 {
+    /**
+     * @var Post
+     */
+    $post = $parameters->get("post");
+
     //TODO Do something with the $post object.
 }
 ```
@@ -183,7 +200,7 @@ public function viewSingle(Post $post)
 
 Middlewares are run by the Router when it is trying to find a matching Route. If the Route matches the URL pattern, the Router will run the Middlewares which are able to perform additional checks to determine whether the Route should match or not. By returning `false` in a Middleware, the Router will ignore the action and assume that it is not suitable for the particular URL.
 
-Any Middlewares you create must implement `\Sid\Framework\MiddlewareInterface` and, like with Controllers and Converters, you can inject any services you require via the constructor.
+Any Middlewares you create must implement `\Sid\Framework\MiddlewareInterface` and, like with Converters, you can inject any services you require via the constructor.
 
 ```php
 namespace Middleware;

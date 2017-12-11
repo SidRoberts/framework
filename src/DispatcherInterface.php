@@ -10,5 +10,5 @@ use Sid\Framework\Dispatcher\Path;
  */
 interface DispatcherInterface
 {
-    public function dispatch(Path $path, array $params = []);
+    public function dispatch(Path $path, Parameters $parameters);
 }

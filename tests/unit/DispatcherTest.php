@@ -9,6 +9,7 @@ use Symfony\Component\DependencyInjection\Container;
 use Sid\Framework\Dispatcher;
 use Sid\Framework\Dispatcher\Path;
 use Sid\Framework\Resolver;
+use Sid\Framework\Parameters;
 
 class DispatcherTest extends Test
 {
@@ -28,6 +29,9 @@ class DispatcherTest extends Test
             new Path(
                 \Controller\IndexController::class,
                 "index"
+            ),
+            new Parameters(
+                []
             )
         );
 
@@ -54,10 +58,12 @@ class DispatcherTest extends Test
                 \Controller\MathController::class,
                 "addition"
             ),
-            [
-                2,
-                "3"
-            ]
+            new Parameters(
+                [
+                    "a" => 2,
+                    "b" => "3",
+                ]
+            )
         );
 
         $this->assertEquals(

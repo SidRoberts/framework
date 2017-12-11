@@ -22,7 +22,7 @@ class Resolver implements ResolverInterface
 
 
 
-    public function typehintClass(string $className)
+    public function typehintClass(string $className, array $custom = [])
     {
         $reflectionClass = new ReflectionClass($className);
 
@@ -32,20 +32,20 @@ class Resolver implements ResolverInterface
 
         $reflectionMethod = $reflectionClass->getMethod("__construct");
 
-        $params = $this->resolveParams($reflectionMethod);
+        $params = $this->resolveParams($reflectionMethod, $custom);
 
         return $reflectionClass->newInstanceArgs($params);
     }
 
 
 
-    public function typehintMethod($class, string $method)
+    public function typehintMethod($class, string $method, array $custom = [])
     {
         $className = get_class($class);
 
         $reflectionMethod = new ReflectionMethod($className, $method);
 
-        $params = $this->resolveParams($reflectionMethod);
+        $params = $this->resolveParams($reflectionMethod, $custom);
 
         return call_user_func_array(
             [
@@ -58,7 +58,7 @@ class Resolver implements ResolverInterface
 
 
 
-    protected function resolveParams(ReflectionMethod $reflectionMethod) : array
+    protected function resolveParams(ReflectionMethod $reflectionMethod, array $custom = []) : array
     {
         $reflectionParameters = $reflectionMethod->getParameters();
 
@@ -67,7 +67,11 @@ class Resolver implements ResolverInterface
         foreach ($reflectionParameters as $reflectionParameter) {
             $serviceName = $reflectionParameter->getName();
 
-            $paramService = $this->container->get($serviceName);
+            if (isset($custom[$serviceName])) {
+                $paramService = $custom[$serviceName];
+            } else {
+                $paramService = $this->container->get($serviceName);
+            }
 
             $params[] = $paramService;
         }
