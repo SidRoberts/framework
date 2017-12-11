@@ -12,7 +12,7 @@ class Uri
     /**
      * @var string
      */
-    protected $uri = "";
+    protected $uri;
 
 
 
