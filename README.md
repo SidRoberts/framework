@@ -139,7 +139,12 @@ use Sid\Framework\Router\Exception\RouteNotFoundException;
 
 class PostConverter implements ConverterInterface
 {
+    /**
+     * @var EntityManager
+     */
     protected $doctrine;
+
+
 
     public function __construct(EntityManager $doctrine)
     {
@@ -165,7 +170,7 @@ class PostConverter implements ConverterInterface
 }
 ```
 
-By throwing `\Sid\Framework\Router\Exception\RouteNotFoundException`, you can trigger a 404 error. In the above example, if the Post object cannot be found in the database, this exception is thrown to avoid having to deal with in the action method.
+By throwing `\Sid\Framework\Router\Exception\RouteNotFoundException`, you can trigger a 404 error. In the above example, if the Post object cannot be found in the database, this exception is thrown to avoid having to deal with it in the action method.
 
 ```php
 use Post;
@@ -210,7 +215,12 @@ use Sid\Framework\Router\Route;
 
 class IsLoggedInMiddleware implements MiddlewareInterface
 {
+    /**
+     * @var Auth
+     */
     protected $auth;
+
+
 
     public function __construct(Auth $auth)
     {
