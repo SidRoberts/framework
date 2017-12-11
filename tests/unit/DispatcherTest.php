@@ -2,13 +2,15 @@
 
 namespace Sid\Framework\Test\Unit;
 
+use Codeception\TestCase\Test;
+
 use Symfony\Component\DependencyInjection\Container;
 
 use Sid\Framework\Dispatcher;
 use Sid\Framework\Dispatcher\Path;
 use Sid\Framework\Resolver;
 
-class DispatcherTest extends \Codeception\TestCase\Test
+class DispatcherTest extends Test
 {
     public function testSimpleDispatch()
     {

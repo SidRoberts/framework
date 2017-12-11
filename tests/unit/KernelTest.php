@@ -2,20 +2,23 @@
 
 namespace Sid\Framework\Test\Unit;
 
-use Symfony\Component\DependencyInjection\Container;
+use Codeception\TestCase\Test;
+
+use Doctrine\Common\Annotations\AnnotationReader;
 
 use Sid\Framework\Kernel;
 use Sid\Framework\Dispatcher;
 use Sid\Framework\Resolver;
+use Sid\Framework\Dispatcher\Path;
 use Sid\Framework\Router;
 use Sid\Framework\Router\RouteCollection;
+
+use Symfony\Component\DependencyInjection\Container;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Sid\Framework\Kernel\KernelEvents;
-
-class KernelTest extends \Codeception\TestCase\Test
+class KernelTest extends Test
 {
     public function testBasicHandle()
     {
@@ -25,7 +28,7 @@ class KernelTest extends \Codeception\TestCase\Test
 
 
 
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+        $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
@@ -67,7 +70,7 @@ class KernelTest extends \Codeception\TestCase\Test
 
 
 
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+        $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
@@ -86,7 +89,7 @@ class KernelTest extends \Codeception\TestCase\Test
 
 
 
-        $notFoundPath = new \Sid\Framework\Dispatcher\Path(
+        $notFoundPath = new Path(
             \Controller\ErrorController::class,
             "notFound"
         );
@@ -115,7 +118,7 @@ class KernelTest extends \Codeception\TestCase\Test
 
 
 
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+        $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
@@ -128,7 +131,7 @@ class KernelTest extends \Codeception\TestCase\Test
 
 
 
-        $notFoundPath = new \Sid\Framework\Dispatcher\Path(
+        $notFoundPath = new Path(
             \Controller\ErrorController::class,
             "notFound"
         );
@@ -165,7 +168,7 @@ class KernelTest extends \Codeception\TestCase\Test
 
 
 
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+        $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 

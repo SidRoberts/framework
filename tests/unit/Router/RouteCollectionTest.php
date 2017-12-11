@@ -2,13 +2,15 @@
 
 namespace Sid\Framework\Test\Unit\Router;
 
+use Codeception\TestCase\Test;
+use Doctrine\Common\Annotations\AnnotationReader;
 use Sid\Framework\Router\RouteCollection;
 
-class RouteCollectionTest extends \Codeception\TestCase\Test
+class RouteCollectionTest extends Test
 {
     public function testAddController()
     {
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+        $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
@@ -38,7 +40,7 @@ class RouteCollectionTest extends \Codeception\TestCase\Test
 
     public function testAddControllers()
     {
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+        $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
@@ -65,7 +67,7 @@ class RouteCollectionTest extends \Codeception\TestCase\Test
      */
     public function testControllerNotFoundException()
     {
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+        $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
@@ -79,7 +81,7 @@ class RouteCollectionTest extends \Codeception\TestCase\Test
      */
     public function testNotAControllerException()
     {
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+        $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 

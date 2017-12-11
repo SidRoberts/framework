@@ -2,9 +2,10 @@
 
 namespace Sid\Framework\Test\Unit\Dispatcher;
 
+use Codeception\TestCase\Test;
 use Sid\Framework\Dispatcher\Path;
 
-class PathTest extends \Codeception\TestCase\Test
+class PathTest extends Test
 {
     public function testGetters()
     {

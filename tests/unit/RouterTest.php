@@ -2,6 +2,10 @@
 
 namespace Sid\Framework\Test\Unit;
 
+use Codeception\TestCase\Test;
+
+use Doctrine\Common\Annotations\AnnotationReader;
+
 use Symfony\Component\DependencyInjection\Container;
 
 use Sid\Framework\Resolver;
@@ -14,7 +18,7 @@ use Sid\Framework\Router\Exception\RouteNotFoundException;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class RouterTest extends \Codeception\TestCase\Test
+class RouterTest extends Test
 {
     public function testGetRouteCollection()
     {
@@ -24,7 +28,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
 
 
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+        $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
@@ -46,7 +50,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
 
 
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+        $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
@@ -79,7 +83,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
 
 
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+        $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
@@ -140,7 +144,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
 
 
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+        $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
@@ -196,7 +200,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
 
 
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+        $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
@@ -215,7 +219,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
 
 
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+        $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
@@ -256,7 +260,7 @@ class RouterTest extends \Codeception\TestCase\Test
 
 
 
-        $annotations = new \Doctrine\Common\Annotations\AnnotationReader();
+        $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
