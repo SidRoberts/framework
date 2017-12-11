@@ -11,6 +11,7 @@ use Sid\Framework\Dispatcher\Path;
 
 use Sid\Framework\Router\Exception\ControllerNotFoundException;
 use Sid\Framework\Router\Exception\NotAControllerException;
+use Sid\Framework\Router\Exception\NotAnActionMethodException;
 use Sid\Framework\Router\Route\Uri;
 use Sid\Framework\Router\Route\Method;
 use Sid\Framework\Router\Route\Requirements;
@@ -76,9 +77,11 @@ class RouteCollection
                 Uri::class
             );
 
-            // If there's no annotation then the method is not an action.
-            if (!$routeAnnotation) {
-                continue;
+            // If there's no URI then the method is not an action.
+            if (!$uri) {
+                throw new NotAnActionMethodException(
+                    $controller . "::" . $action
+                );
             }
 
             $method = $this->annotations->getMethodAnnotation(
