@@ -4,55 +4,52 @@ namespace Controller;
 
 use Sid\Framework\Controller;
 
-use Sid\Framework\Router\Annotations\Route;
+use Sid\Framework\Router\Route\Uri;
+use Sid\Framework\Router\Route\Middlewares;
 
 class MiddlewareController extends Controller
 {
     /**
-     * @Route(
-     *     "/middleware/true",
-     *     middlewares={
-     *         "Middleware\ExampleTrue"
-     *     }
-     * )
+     * @Uri("/middleware/true")
+     *
+     * @Middlewares({
+     *     "Middleware\ExampleTrue"
+     * })
      */
     public function true()
     {
     }
 
     /**
-     * @Route(
-     *     "/middleware/false",
-     *     middlewares={
-     *         "Middleware\ExampleFalse"
-     *     }
-     * )
+     * @Uri("/middleware/false")
+     *
+     * @Middlewares({
+     *     "Middleware\ExampleFalse"
+     * })
      */
     public function false()
     {
     }
 
     /**
-     * @Route(
-     *     "/middleware/true-false",
-     *     middlewares={
-     *         "Middleware\ExampleTrue",
-     *         "Middleware\ExampleFalse"
-     *     }
-     * )
+     * @Uri("/middleware/true-false")
+     *
+     * @Middlewares({
+     *     "Middleware\ExampleTrue",
+     *     "Middleware\ExampleFalse"
+     * })
      */
     public function multiple1()
     {
     }
 
     /**
-     * @Route(
-     *     "/middleware/false-true",
-     *     middlewares={
-     *         "Middleware\ExampleFalse",
-     *         "Middleware\ExampleTrue"
-     *     }
-     * )
+     * @Uri("/middleware/false-true")
+     *
+     * @Middlewares({
+     *     "Middleware\ExampleFalse",
+     *     "Middleware\ExampleTrue"
+     * })
      */
     public function multiple2()
     {

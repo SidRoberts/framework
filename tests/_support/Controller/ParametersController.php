@@ -3,26 +3,23 @@
 namespace Controller;
 
 use Sid\Framework\Controller;
-
-use Sid\Framework\Router\Annotations\Route;
+use Sid\Framework\Router\Route\Uri;
+use Sid\Framework\Router\Route\Requirements;
 
 class ParametersController extends Controller
 {
     /**
-     * @Route(
-     *     "/parameters/{name}"
-     * )
+     * @Uri("/parameters/{name}")
      */
     public function a($name)
     {
     }
 
     /**
-     * @Route(
-     *     "/parameters/{name}/{id}",
-     *     requirements={
-     *         "id"="\d+"
-     *     }
+     * @Uri("/parameters/{name}/{id}")
+     *
+     * @Requirements(
+     *     id="\d+"
      * )
      */
     public function b($name, $id)
@@ -30,12 +27,11 @@ class ParametersController extends Controller
     }
 
     /**
-     * @Route(
-     *     "/parameters/{name}/{id}/{date}",
-     *     requirements={
-     *         "id"="\d+",
-     *         "date"="[0-9\-]+"
-     *     }
+     * @Uri("/parameters/{name}/{id}/{date}")
+     *
+     * @Requirements(
+     *     id="\d+",
+     *     date="[0-9\-]+"
      * )
      */
     public function c($name, $id, $date)

@@ -50,7 +50,11 @@
             "Sid\\Framework\\": "src/"
         },
         "files": [
-            "src/Router/Annotations/Route.php"
+            "src/Router/Route/Uri.php",
+            "src/Router/Route/Method.php",
+            "src/Router/Route/Requirements.php",
+            "src/Router/Route/Middlewares.php",
+            "src/Router/Route/Converters.php"
         ]
     }
 }

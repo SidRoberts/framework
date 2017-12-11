@@ -28,17 +28,13 @@ This library can be divided into three components:
 
 All controllers should extend `\Sid\Framework\Controller` or implement `\Sid\Framework\ControllerInterface`. Specify what services you require in the constructor.
 
-Action methods do not require a suffix - you're free to call it however you want - but they must have a `\Sid\Framework\Router\Annotations\Route` annotation.
-
-The first unnamed parameter of the annotation is the URL you want to match:
+Action methods do not require a suffix - you're free to call it however you want - but they must have a `\Sid\Framework\Router\Route\Uri` annotation.
 
 ```php
-use Sid\Framework\Router\Annotations\Route;
+use Sid\Framework\Router\Route\Uri;
 
 /**
- * @Route(
- *     "/this/is/your/url"
- * )
+ * @Uri("/this/is/your/url")
  */
 public function index()
 {
@@ -49,12 +45,10 @@ public function index()
 You can also create URLs with dynamic values by enclosing their identifier in curly brackets (eg. `{id}`). These values will become the parameters of the action method:
 
 ```php
-use Sid\Framework\Router\Annotations\Route;
+use Sid\Framework\Router\Route\Uri;
 
 /**
- * @Route(
- *     "/post/{id}"
- * )
+ * @Uri("/post/{id}")
  */
 public function viewSingle($id)
 {
@@ -62,9 +56,7 @@ public function viewSingle($id)
 }
 
 /**
- * @Route(
- *     "/something-crazy/{a}/{b}/{c}"
- * )
+ * @Uri("/something-crazy/{a}/{b}/{c}")
  */
 public function something($a, $b, $c)
 {
@@ -75,14 +67,14 @@ public function something($a, $b, $c)
 You can also require that the parameters adhere to a certain regular expression. This example will match `/post/1`, `/post/2`, `/post/3` and so on but will not match something like `/post/abc`:
 
 ```php
-use Sid\Framework\Router\Annotations\Route;
+use Sid\Framework\Router\Route\Uri;
+use Sid\Framework\Router\Route\Requirements;
 
 /**
- * @Route(
- *     "/post/{id}",
- *     requirements={
- *         "id"="\d+"
- *     }
+ * @Uri("/post/{id}")
+ *
+ * @Requirements(
+ *     id="\d+"
  * )
  */
 public function viewSingle($id)
@@ -94,13 +86,13 @@ public function viewSingle($id)
 You can also specify which HTTP method to match (eg. `GET`, `POST`, `HEAD`, `PUT`, `DELETE`, `TRACE`, `OPTIONS`, `CONNECT`, `PATCH`):
 
 ```php
-use Sid\Framework\Router\Annotations\Route;
+use Sid\Framework\Router\Route\Uri;
+use Sid\Framework\Router\Route\Method;
 
 /**
- * @Route(
- *     "/url",
- *     method="GET"
- * )
+ * @Uri("/url")
+ *
+ * @Method("GET")
  */
 public function get()
 {
@@ -108,10 +100,9 @@ public function get()
 }
 
 /**
- * @Route(
- *     "/url",
- *     method="POST"
- * )
+ * @Uri("/url")
+ *
+ * @Method("POST")
  */
 public function post()
 {
@@ -167,17 +158,19 @@ When using Converters, you can also typehint the action method to enforce the ob
 
 ```php
 use Post;
-use Sid\Framework\Router\Annotations\Route;
+use Sid\Framework\Router\Route\Uri;
+use Sid\Framework\Router\Route\Requirements;
+use Sid\Framework\Router\Route\Converters;
 
 /**
- * @Route(
- *     "/post/{post}",
- *     requirements={
- *         "post"="\d+"
- *     },
- *     converters={
- *         "post"="Converter\PostConverter"
- *     }
+ * @Uri("/post/{post}")
+ *
+ * @Requirements(
+ *     post="\d+"
+ * )
+ *
+ * @Converters(
+ *     post="Converter\PostConverter"
  * )
  */
 public function viewSingle(Post $post)
@@ -222,17 +215,17 @@ This is useful for when you want to separate the controller logic into two or mo
 
 ```php
 use Sid\Framework\Controller;
-use Sid\Framework\Router\Annotations\Route;
+use Sid\Framework\Router\Route\Uri;
+use Sid\Framework\Router\Route\Middlewares;
 
 class UserController extends Controller
 {
     /**
-     * @Route(
-     *     "/something",
-     *     middlewares={
-     *         "Middleware\IsLoggedOutMiddleware"
-     *     }
-     * )
+     * @Uri("/something")
+     *
+     * @Middlewares({
+     *     "Middleware\IsLoggedOutMiddleware"
+     * })
      */
     public function guest()
     {
@@ -240,12 +233,11 @@ class UserController extends Controller
     }
 
     /**
-     * @Route(
-     *     "/something",
-     *     middlewares={
-     *         "Middleware\IsLoggedInMiddleware"
-     *     }
-     * )
+     * @Uri("/something")
+     *
+     * @Middlewares({
+     *     "Middleware\IsLoggedInMiddleware"
+     * })
      */
     public function user()
     {
@@ -259,17 +251,17 @@ class UserController extends Controller
 You can even create action methods with multiple Middlewares. If any of them of fail, the action will fail to match:
 
 ```php
-use Sid\Framework\Router\Annotations\Route;
+use Sid\Framework\Router\Route\Uri;
+use Sid\Framework\Router\Route\Middlewares;
 
 /**
- * @Route(
- *     "/something",
- *     middlewares={
- *         "Middleware\OneMiddleware",
- *         "Middleware\AnotherMiddleware",
- *         "Middleware\AndAnotherMiddleware"
- *     }
- * )
+ * @Uri("/something")
+ *
+ * @Middlewares({
+ *     "Middleware\OneMiddleware",
+ *     "Middleware\AnotherMiddleware",
+ *     "Middleware\AndAnotherMiddleware"
+ * })
  */
 public function something()
 {

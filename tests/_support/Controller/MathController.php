@@ -3,18 +3,17 @@
 namespace Controller;
 
 use Sid\Framework\Controller;
-
-use Sid\Framework\Router\Annotations\Route;
+use Sid\Framework\Router\Route\Uri;
+use Sid\Framework\Router\Route\Requirements;
 
 class MathController extends Controller
 {
     /**
-     * @Route(
-     *     "/math/add/{a}/{b}",
-     *     requirements={
-     *         "a"="\d+",
-     *         "b"="\d+"
-     *     }
+     * @Uri("/math/add/{a}/{b}")
+     *
+     * @Requirements(
+     *     a="\d+",
+     *     b="\d+"
      * )
      */
     public function addition($a, $b)

@@ -3,17 +3,16 @@
 namespace Controller;
 
 use Sid\Framework\Controller;
-
-use Sid\Framework\Router\Annotations\Route;
+use Sid\Framework\Router\Route\Uri;
+use Sid\Framework\Router\Route\Converters;
 
 class ConverterController extends Controller
 {
     /**
-     * @Route(
-     *     "/converter/double/{i}",
-     *     converters={
-     *         "i"="Converter\Doubler"
-     *     }
+     * @Uri("/converter/double/{i}")
+     *
+     * @Converters(
+     *     i="Converter\Doubler"
      * )
      */
     public function double(int $i)

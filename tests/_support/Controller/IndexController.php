@@ -3,15 +3,12 @@
 namespace Controller;
 
 use Sid\Framework\Controller;
-
-use Sid\Framework\Router\Annotations\Route;
+use Sid\Framework\Router\Route\Uri;
 
 class IndexController extends Controller
 {
     /**
-     * @Route(
-     *     "/"
-     * )
+     * @Uri("/")
      */
     public function index()
     {

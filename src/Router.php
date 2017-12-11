@@ -4,10 +4,10 @@ namespace Sid\Framework;
 
 use Sid\Framework\Middleware\Runner as MiddlewareRunner;
 
-use Sid\Framework\Router\Annotations\Route as RouteAnnotation;
 use Sid\Framework\Router\Exception\RouteNotFoundException;
 use Sid\Framework\Router\Match;
 use Sid\Framework\Router\Route;
+use Sid\Framework\Router\Route\Uri;
 use Sid\Framework\Router\RouteCollection;
 
 class Router implements RouterInterface
@@ -57,15 +57,15 @@ class Router implements RouterInterface
         $routes = $this->routeCollection->getRoutes();
 
         foreach ($routes as $route) {
-            $routeAnnotation = $route->getRouteAnnotation();
+            $methodClass = $route->getMethod();
 
-            $pattern = $routeAnnotation->getCompiledPattern();
+            $pattern = $route->getCompiledPattern();
 
 
 
             $routeFound =
                 // Check if the current HTTP method is allowed by the route.
-                ($routeAnnotation->getMethod() === $method)
+                ($methodClass->getMethod() === $method)
                 &&
                 (preg_match($pattern, $uri, $params) === 1)
                 &&
@@ -100,6 +100,7 @@ class Router implements RouterInterface
         );
 
 
+
         $path = $route->getPath();
 
         $params = $this->convertParams($route, $params);
@@ -114,11 +115,7 @@ class Router implements RouterInterface
 
     protected function runMiddlewares(Route $route, string $uri) : bool
     {
-        $routeAnnotation = $route->getRouteAnnotation();
-
-        $middlewares = $routeAnnotation->getMiddlewares();
-
-
+        $middlewares = $route->getMiddlewares();
 
         $middlewareRunner = new MiddlewareRunner();
 
@@ -135,11 +132,7 @@ class Router implements RouterInterface
 
     protected function convertParams(Route $route, array $params) : array
     {
-        $routeAnnotation = $route->getRouteAnnotation();
-
-
-
-        $converters = $routeAnnotation->getConverters();
+        $converters = $route->getConverters();
 
         foreach ($params as $key => $value) {
             // Check if the part has a converter.
