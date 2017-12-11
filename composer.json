@@ -27,11 +27,11 @@
     "require": {
         "php": "~7.0",
 
-        "symfony/dependency-injection": "~3.3",
+        "symfony/dependency-injection": "~3.4",
 
-        "doctrine/annotations": "~1.2",
+        "doctrine/annotations": "~1.6",
 
-        "symfony/http-foundation": "~3.1",
+        "symfony/http-foundation": "~3.4",
 
         "twig/twig": "~1.24"
     },
