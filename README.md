@@ -78,6 +78,7 @@ The `$parameters` property can be anywhere in the method signature.
 You can also require that the parameters adhere to a certain regular expression. This example will match `/post/1`, `/post/2`, `/post/3` and so on but will not match something like `/post/abc`:
 
 ```php
+use Sid\Framework\Parameters;
 use Sid\Framework\Router\Route\Uri;
 use Sid\Framework\Router\Route\Requirements;
 
