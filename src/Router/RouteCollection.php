@@ -62,6 +62,7 @@ class RouteCollection
 
 
 
+        // Get public methods.
         $actions = get_class_methods($controller);
 
         foreach ($actions as $action) {

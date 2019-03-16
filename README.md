@@ -28,7 +28,7 @@ This library can be divided into three components:
 
 All controllers should extend `\Sid\Framework\Controller` or implement `\Sid\Framework\ControllerInterface`. Specify what services you require in the method signature.
 
-Every method is classed as an action and, although they do not require a suffix (you're free to call it however you want), they must have a `\Sid\Framework\Router\Route\Uri` annotation.
+Every public method is classed as an action and, although they do not require a suffix (you're free to call it however you want), they must have a `\Sid\Framework\Router\Route\Uri` annotation.
 
 ```php
 use Auth;
