@@ -2,12 +2,14 @@
 
 namespace Sid\Framework\Test\Unit\Middleware;
 
+use Codeception\TestCase\Test;
+
 use Sid\Framework\Dispatcher\Path;
 use Sid\Framework\Middleware\Runner;
 use Sid\Framework\Router\Route;
 use Sid\Framework\Router\Route\Uri;
 
-class RunnerTest extends \Codeception\TestCase\Test
+class RunnerTest extends Test
 {
     public function testGetters()
     {

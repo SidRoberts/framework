@@ -4,6 +4,7 @@ namespace Sid\Framework\Test\Unit\Router\Route;
 
 use Codeception\TestCase\Test;
 use InvalidArgumentException;
+use Sid\Framework\Router;
 use Sid\Framework\Router\Route\Middlewares;
 
 class MiddlewaresTest extends Test
@@ -19,7 +20,7 @@ class MiddlewaresTest extends Test
         $middlewares = new Middlewares(
             [
                 "value" => [
-                    \Sid\Framework\Router::class
+                    Router::class,
                 ]
             ]
         );

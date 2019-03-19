@@ -5,6 +5,7 @@ namespace Sid\Framework\Test\Unit\Router\Route;
 use Codeception\TestCase\Test;
 use InvalidArgumentException;
 use LogicException;
+use Sid\Framework\Router;
 use Sid\Framework\Router\Route\Converters;
 
 class ConvertersTest extends Test
@@ -19,7 +20,7 @@ class ConvertersTest extends Test
 
         $converters = new Converters(
             [
-                "example" => \Sid\Framework\Router::class,
+                "example" => Router::class,
             ]
         );
     }

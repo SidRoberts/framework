@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use InvalidArgumentException;
 use Sid\Framework\Controller;
 use Sid\Framework\Parameters;
 use Sid\Framework\Router\Route\Uri;
@@ -21,7 +22,7 @@ class RequirementsController extends Controller
         $i = $parameters->get("i");
 
         if (!preg_match("/^\d+$/", $i) === false) {
-            throw new \InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
     }
 }
