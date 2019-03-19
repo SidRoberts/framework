@@ -6,7 +6,7 @@ php:
 sudo: false
 
 install:
-  - composer update --quiet
+  - composer update
 
 script:
   - php vendor/bin/codecept run unit
