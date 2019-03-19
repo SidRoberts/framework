@@ -3,15 +3,20 @@
 namespace Sid\Framework\Test\Unit\Router\Route;
 
 use Codeception\TestCase\Test;
+use InvalidArgumentException;
+use LogicException;
 use Sid\Framework\Router\Route\Converters;
 
 class ConvertersTest extends Test
 {
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testBadConverter()
     {
+        $this->expectException(
+            InvalidArgumentException::class
+        );
+
+
+
         $converters = new Converters(
             [
                 "example" => \Sid\Framework\Router::class,
@@ -19,11 +24,14 @@ class ConvertersTest extends Test
         );
     }
 
-    /**
-     * @expectedException LogicException
-     */
     public function testImmutabilitySet()
     {
+        $this->expectException(
+            LogicException::class
+        );
+
+
+
         $converters = new Converters(
             []
         );
@@ -31,11 +39,14 @@ class ConvertersTest extends Test
         $converters["example"] = null;
     }
 
-    /**
-     * @expectedException LogicException
-     */
     public function testImmutabilityUnset()
     {
+        $this->expectException(
+            LogicException::class
+        );
+
+
+
         $converters = new Converters(
             []
         );

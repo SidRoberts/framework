@@ -3,6 +3,7 @@
 namespace Sid\Framework\Test\Unit\Router\Route;
 
 use Codeception\TestCase\Test;
+use InvalidArgumentException;
 use Sid\Framework\Router\Route\Uri;
 
 class UriTest extends Test
@@ -25,11 +26,14 @@ class UriTest extends Test
         );
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testEmptyAnnotation()
     {
+        $this->expectException(
+            InvalidArgumentException::class
+        );
+
+
+
         $uri = new Uri(
             []
         );

@@ -3,6 +3,7 @@
 namespace Sid\Framework\Test\Unit\Router\Route;
 
 use Codeception\TestCase\Test;
+use InvalidArgumentException;
 use Sid\Framework\Router\Route\Method;
 
 class MethodTest extends Test
@@ -25,11 +26,14 @@ class MethodTest extends Test
         );
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testEmptyAnnotation()
     {
+        $this->expectException(
+            InvalidArgumentException::class
+        );
+
+
+
         $method = new Method(
             []
         );

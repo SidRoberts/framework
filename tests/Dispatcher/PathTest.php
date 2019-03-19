@@ -4,6 +4,8 @@ namespace Sid\Framework\Test\Unit\Dispatcher;
 
 use Codeception\TestCase\Test;
 use Sid\Framework\Dispatcher\Path;
+use Sid\Framework\Dispatcher\Exception\ControllerNotFoundException;
+use Sid\Framework\Dispatcher\Exception\ActionNotFoundException;
 
 class PathTest extends Test
 {
@@ -32,11 +34,14 @@ class PathTest extends Test
         );
     }
 
-    /**
-     * @expectedException \Sid\Framework\Dispatcher\Exception\ControllerNotFoundException
-     */
     public function testControllerNotFoundException()
     {
+        $this->expectException(
+            ControllerNotFoundException::class
+        );
+
+
+
         $controller = "FakeController";
         $action     = "index";
 
@@ -46,11 +51,14 @@ class PathTest extends Test
         );
     }
 
-    /**
-     * @expectedException \Sid\Framework\Dispatcher\Exception\ActionNotFoundException
-     */
     public function testActionNotFoundException()
     {
+        $this->expectException(
+            ActionNotFoundException::class
+        );
+
+
+
         $controller = \Controller\IndexController::class;
         $action     = "fake";
 

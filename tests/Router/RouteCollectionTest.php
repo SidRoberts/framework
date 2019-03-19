@@ -4,6 +4,8 @@ namespace Sid\Framework\Test\Unit\Router;
 
 use Codeception\TestCase\Test;
 use Doctrine\Common\Annotations\AnnotationReader;
+use Sid\Framework\Router\Exception\ControllerNotFoundException;
+use Sid\Framework\Router\Exception\NotAControllerException;
 use Sid\Framework\Router\RouteCollection;
 
 class RouteCollectionTest extends Test
@@ -62,11 +64,14 @@ class RouteCollectionTest extends Test
         );
     }
 
-    /**
-     * @expectedException \Sid\Framework\Router\Exception\ControllerNotFoundException
-     */
     public function testControllerNotFoundException()
     {
+        $this->expectException(
+            ControllerNotFoundException::class
+        );
+
+
+
         $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
@@ -76,11 +81,14 @@ class RouteCollectionTest extends Test
         );
     }
 
-    /**
-     * @expectedException \Sid\Framework\Router\Exception\NotAControllerException
-     */
     public function testNotAControllerException()
     {
+        $this->expectException(
+            NotAControllerException::class
+        );
+
+
+
         $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);

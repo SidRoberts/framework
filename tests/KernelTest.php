@@ -12,6 +12,7 @@ use Sid\Framework\Kernel;
 use Sid\Framework\Dispatcher;
 use Sid\Framework\Dispatcher\Path;
 use Sid\Framework\Router;
+use Sid\Framework\Router\Exception\RouteNotFoundException;
 use Sid\Framework\Router\RouteCollection;
 
 use Symfony\Component\DependencyInjection\Container;
@@ -158,11 +159,14 @@ class KernelTest extends Test
         );
     }
 
-    /**
-     * @expectedException \Sid\Framework\Router\Exception\RouteNotFoundException
-     */
     public function testRouteNotFoundException()
     {
+        $this->expectException(
+            RouteNotFoundException::class
+        );
+
+
+
         $container = new Container();
 
         $resolver = new Resolver($container);

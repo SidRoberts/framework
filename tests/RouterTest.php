@@ -11,10 +11,9 @@ use Symfony\Component\DependencyInjection\Container;
 use Sid\ContainerResolver\Resolver\Psr11 as Resolver;
 
 use Sid\Framework\Router;
+use Sid\Framework\Router\Exception\RouteNotFoundException;
 use Sid\Framework\Router\Route;
 use Sid\Framework\Router\RouteCollection;
-
-use Sid\Framework\Router\Exception\RouteNotFoundException;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -189,11 +188,14 @@ class RouterTest extends Test
         ];
     }
 
-    /**
-     * @expectedException \Sid\Framework\Router\Exception\RouteNotFoundException
-     */
     public function testRouteNotFoundException()
     {
+        $this->expectException(
+            RouteNotFoundException::class
+        );
+
+
+
         $container = new Container();
 
         $resolver = new Resolver($container);
