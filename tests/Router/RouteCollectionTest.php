@@ -17,27 +17,27 @@ class RouteCollectionTest extends Test
 
         $routeCollection = new RouteCollection($annotations);
 
-        $this->assertEquals(
+        $this->assertCount(
             0,
-            count($routeCollection->getRoutes())
+            $routeCollection->getRoutes()
         );
 
         $routeCollection->addController(
             \Controller\IndexController::class
         );
 
-        $this->assertEquals(
+        $this->assertCount(
             1,
-            count($routeCollection->getRoutes())
+            $routeCollection->getRoutes()
         );
 
         $routeCollection->addController(
             \Controller\ParametersController::class
         );
 
-        $this->assertEquals(
+        $this->assertCount(
             4,
-            count($routeCollection->getRoutes())
+            $routeCollection->getRoutes()
         );
     }
 
@@ -47,9 +47,9 @@ class RouteCollectionTest extends Test
 
         $routeCollection = new RouteCollection($annotations);
 
-        $this->assertEquals(
+        $this->assertCount(
             0,
-            count($routeCollection->getRoutes())
+            $routeCollection->getRoutes()
         );
 
         $routeCollection->addControllers(
@@ -59,9 +59,9 @@ class RouteCollectionTest extends Test
             ]
         );
 
-        $this->assertEquals(
+        $this->assertCount(
             4,
-            count($routeCollection->getRoutes())
+            $routeCollection->getRoutes()
         );
     }
 

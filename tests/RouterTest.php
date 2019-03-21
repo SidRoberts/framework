@@ -271,9 +271,9 @@ class RouterTest extends Test
         $router = new Router($resolver, $routeCollection);
 
 
-        $this->assertEquals(
+        $this->assertCount(
             0,
-            count($routeCollection->getRoutes())
+            $routeCollection->getRoutes()
         );
 
 
@@ -282,9 +282,9 @@ class RouterTest extends Test
             \Controller\IndexController::class
         );
 
-        $this->assertEquals(
+        $this->assertCount(
             1,
-            count($routeCollection->getRoutes())
+            $routeCollection->getRoutes()
         );
 
 
@@ -293,9 +293,9 @@ class RouterTest extends Test
             \Controller\RequirementsController::class
         );
 
-        $this->assertEquals(
+        $this->assertCount(
             2,
-            count($routeCollection->getRoutes())
+            $routeCollection->getRoutes()
         );
 
 
