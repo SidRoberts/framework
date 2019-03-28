@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface KernelInterface
 {
-    public function getNotFoundPath();
+    public function getNotFoundPath() : ?Path;
 
     public function setNotFoundPath(Path $notFoundPath);
 

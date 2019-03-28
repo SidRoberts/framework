@@ -36,7 +36,7 @@ class Kernel implements KernelInterface
 
 
 
-    public function getNotFoundPath()
+    public function getNotFoundPath() : ?Path
     {
         return $this->notFoundPath;
     }
