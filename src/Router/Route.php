@@ -107,10 +107,16 @@ class Route
     {
         $pattern = $this->getUri()->getUri();
 
-        //TODO Explain this.
-        preg_match_all("/\{([A-Za-z]+)\}/", $pattern, $matches);
+        // Get parameter names from URI.
+        preg_match_all(
+            "/\{([A-Za-z]+)\}/",
+            $pattern,
+            $matches
+        );
 
-        $params = array_flip($matches[1]);
+        $params = array_flip(
+            $matches[1]
+        );
 
         // Assume every parameter has no requirement - any value is allowed.
         foreach ($params as $key => $value) {
@@ -118,7 +124,10 @@ class Route
         }
 
         // Merge with the requirements.
-        $params = array_merge($params, $this->requirements->toArray());
+        $params = array_merge(
+            $params,
+            $this->requirements->toArray()
+        );
 
         foreach ($params as $param => $requirement) {
             $pattern = str_replace(
