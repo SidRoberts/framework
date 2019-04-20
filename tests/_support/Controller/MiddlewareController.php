@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Tests\Controller;
 
 use Sid\Framework\Controller;
 
@@ -13,7 +13,7 @@ class MiddlewareController extends Controller
      * @Uri("/middleware/true")
      *
      * @Middlewares({
-     *     "Middleware\ExampleTrue"
+     *     "Tests\Middleware\ExampleTrue"
      * })
      */
     public function true()
@@ -24,7 +24,7 @@ class MiddlewareController extends Controller
      * @Uri("/middleware/false")
      *
      * @Middlewares({
-     *     "Middleware\ExampleFalse"
+     *     "Tests\Middleware\ExampleFalse"
      * })
      */
     public function false()
@@ -35,8 +35,8 @@ class MiddlewareController extends Controller
      * @Uri("/middleware/true-false")
      *
      * @Middlewares({
-     *     "Middleware\ExampleTrue",
-     *     "Middleware\ExampleFalse"
+     *     "Tests\Middleware\ExampleTrue",
+     *     "Tests\Middleware\ExampleFalse"
      * })
      */
     public function multiple1()
@@ -47,8 +47,8 @@ class MiddlewareController extends Controller
      * @Uri("/middleware/false-true")
      *
      * @Middlewares({
-     *     "Middleware\ExampleFalse",
-     *     "Middleware\ExampleTrue"
+     *     "Tests\Middleware\ExampleFalse",
+     *     "Tests\Middleware\ExampleTrue"
      * })
      */
     public function multiple2()

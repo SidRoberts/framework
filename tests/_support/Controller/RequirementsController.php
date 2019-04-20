@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Tests\Controller;
 
 use InvalidArgumentException;
 use Sid\Framework\Controller;

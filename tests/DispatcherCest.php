@@ -1,20 +1,18 @@
 <?php
 
-namespace Sid\Framework\Test\Unit;
-
-use Codeception\TestCase\Test;
-
-use Symfony\Component\DependencyInjection\Container;
+namespace Tests;
 
 use Sid\ContainerResolver\Resolver\Psr11 as Resolver;
-
 use Sid\Framework\Dispatcher;
 use Sid\Framework\Dispatcher\Path;
 use Sid\Framework\Parameters;
+use Symfony\Component\DependencyInjection\Container;
+use Tests\Controller\IndexController;
+use Tests\Controller\MathController;
 
-class DispatcherTest extends Test
+class DispatcherCest
 {
-    public function testSimpleDispatch()
+    public function testSimpleDispatch(UnitTester $I)
     {
         $container = new Container();
 
@@ -28,7 +26,7 @@ class DispatcherTest extends Test
 
         $returnedValue = $dispatcher->dispatch(
             new Path(
-                \Controller\IndexController::class,
+                IndexController::class,
                 "index"
             ),
             new Parameters(
@@ -36,13 +34,13 @@ class DispatcherTest extends Test
             )
         );
 
-        $this->assertEquals(
+        $I->assertEquals(
             "homepage",
             $returnedValue
         );
     }
 
-    public function testParams()
+    public function testParams(UnitTester $I)
     {
         $container = new Container();
 
@@ -56,7 +54,7 @@ class DispatcherTest extends Test
 
         $returnedValue = $dispatcher->dispatch(
             new Path(
-                \Controller\MathController::class,
+                MathController::class,
                 "addition"
             ),
             new Parameters(
@@ -67,7 +65,7 @@ class DispatcherTest extends Test
             )
         );
 
-        $this->assertEquals(
+        $I->assertEquals(
             5,
             $returnedValue
         );

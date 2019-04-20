@@ -1,101 +1,105 @@
 <?php
 
-namespace Sid\Framework\Test\Unit\Router;
+namespace Tests\Router;
 
-use Codeception\TestCase\Test;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Sid\Framework\Router;
 use Sid\Framework\Router\Exception\ControllerNotFoundException;
 use Sid\Framework\Router\Exception\NotAControllerException;
 use Sid\Framework\Router\RouteCollection;
+use Tests\UnitTester;
+use Tests\Controller\IndexController;
+use Tests\Controller\ParametersController;
 
-class RouteCollectionTest extends Test
+class RouteCollectionCest
 {
-    public function testAddController()
+    public function testAddController(UnitTester $I)
     {
         $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
-        $this->assertCount(
+        $I->assertCount(
             0,
             $routeCollection->getRoutes()
         );
 
         $routeCollection->addController(
-            \Controller\IndexController::class
+            IndexController::class
         );
 
-        $this->assertCount(
+        $I->assertCount(
             1,
             $routeCollection->getRoutes()
         );
 
         $routeCollection->addController(
-            \Controller\ParametersController::class
+            ParametersController::class
         );
 
-        $this->assertCount(
+        $I->assertCount(
             4,
             $routeCollection->getRoutes()
         );
     }
 
-    public function testAddControllers()
+    public function testAddControllers(UnitTester $I)
     {
         $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
-        $this->assertCount(
+        $I->assertCount(
             0,
             $routeCollection->getRoutes()
         );
 
         $routeCollection->addControllers(
             [
-                \Controller\IndexController::class,
-                \Controller\ParametersController::class,
+                IndexController::class,
+                ParametersController::class,
             ]
         );
 
-        $this->assertCount(
+        $I->assertCount(
             4,
             $routeCollection->getRoutes()
         );
     }
 
-    public function testControllerNotFoundException()
+    public function testControllerNotFoundException(UnitTester $I)
     {
-        $this->expectException(
-            ControllerNotFoundException::class
-        );
-
-
-
         $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
-        $routeCollection->addController(
-            "A\Class\That\Does\Not\Exist"
+
+
+        $I->expectException(
+            ControllerNotFoundException::class,
+            function () use ($routeCollection) {
+                $routeCollection->addController(
+                    "A\\Class\\That\\Does\\Not\\Exist"
+                );
+            }
         );
     }
 
-    public function testNotAControllerException()
+    public function testNotAControllerException(UnitTester $I)
     {
-        $this->expectException(
-            NotAControllerException::class
-        );
-
-
-
         $annotations = new AnnotationReader();
 
         $routeCollection = new RouteCollection($annotations);
 
-        $routeCollection->addController(
-            Router::class
+
+
+        $I->expectException(
+            NotAControllerException::class,
+            function () use ($routeCollection) {
+                $routeCollection->addController(
+                    Router::class
+                );
+            }
         );
     }
 }

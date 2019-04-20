@@ -1,6 +1,6 @@
 <?php
 
-namespace Middleware;
+namespace Tests\Middleware;
 
 use Sid\Framework\Router\Route;
 use Sid\Framework\MiddlewareInterface;

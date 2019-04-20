@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Tests\Controller;
 
 use Sid\Framework\Controller;
 use Sid\Framework\Parameters;
@@ -13,7 +13,7 @@ class ConverterController extends Controller
      * @Uri("/converter/double/{i}")
      *
      * @Converters(
-     *     i="Converter\Doubler"
+     *     i="Tests\Converter\Doubler"
      * )
      */
     public function double(Parameters $parameters)

@@ -1,6 +1,6 @@
 <?php
 
-namespace Converter;
+namespace Tests\Converter;
 
 use Sid\Framework\ConverterInterface;
 

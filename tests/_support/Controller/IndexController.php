@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Tests\Controller;
 
 use Sid\Framework\Controller;
 use Sid\Framework\Router\Route\Uri;
@@ -12,6 +12,6 @@ class IndexController extends Controller
      */
     public function index()
     {
-    	return "homepage";
+        return "homepage";
     }
 }

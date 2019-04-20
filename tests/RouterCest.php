@@ -1,25 +1,25 @@
 <?php
 
-namespace Sid\Framework\Test\Unit;
+namespace Tests;
 
-use Codeception\TestCase\Test;
-
+use Codeception\Example;
 use Doctrine\Common\Annotations\AnnotationReader;
-
-use Symfony\Component\DependencyInjection\Container;
-
 use Sid\ContainerResolver\Resolver\Psr11 as Resolver;
-
 use Sid\Framework\Router;
 use Sid\Framework\Router\Exception\RouteNotFoundException;
 use Sid\Framework\Router\Route;
 use Sid\Framework\Router\RouteCollection;
-
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
+use Tests\Controller\ConverterController;
+use Tests\Controller\HttpMethodController;
+use Tests\Controller\IndexController;
+use Tests\Controller\MiddlewareController;
+use Tests\Controller\RequirementsController;
 
-class RouterTest extends Test
+class RouterCest
 {
-    public function testGetRouteCollection()
+    public function testGetRouteCollection(UnitTester $I)
     {
         $container = new Container();
 
@@ -35,13 +35,13 @@ class RouterTest extends Test
 
         $router = new Router($resolver, $routeCollection);
 
-        $this->assertEquals(
+        $I->assertEquals(
             $routeCollection,
             $router->getRouteCollection()
         );
     }
 
-    public function testConverters()
+    public function testConverters(UnitTester $I)
     {
         $container = new Container();
 
@@ -56,7 +56,7 @@ class RouterTest extends Test
 
 
         $routeCollection->addController(
-            \Controller\ConverterController::class
+            ConverterController::class
         );
 
 
@@ -65,7 +65,7 @@ class RouterTest extends Test
 
         $match = $router->handle("/converter/double/123", "GET");
 
-        $this->assertEquals(
+        $I->assertEquals(
             246,
             $match->getParams()->get("i")
         );
@@ -74,7 +74,7 @@ class RouterTest extends Test
     /**
      * @dataProvider middlewaresProvider
      */
-    public function testMiddlewares($url, $shouldPass)
+    public function testMiddlewares(UnitTester $I, Example $example)
     {
         $container = new Container();
 
@@ -89,7 +89,7 @@ class RouterTest extends Test
 
 
         $routeCollection->addController(
-            \Controller\MiddlewareController::class
+            MiddlewareController::class
         );
 
 
@@ -99,15 +99,15 @@ class RouterTest extends Test
 
 
         try {
-            $match = $router->handle($url, "GET");
+            $match = $router->handle($example["url"], "GET");
 
-            $this->assertTrue($shouldPass);
+            $I->assertTrue($example["shouldPass"]);
         } catch (RouteNotFoundException $e) {
-            $this->assertFalse($shouldPass);
+            $I->assertFalse($example["shouldPass"]);
         }
     }
 
-    public function middlewaresProvider()
+    public function middlewaresProvider() : array
     {
         return [
             [
@@ -135,7 +135,7 @@ class RouterTest extends Test
     /**
      * @dataProvider requirementsProvider
      */
-    public function testRequirements($url, $shouldPass)
+    public function testRequirements(UnitTester $I, Example $example)
     {
         $container = new Container();
 
@@ -150,7 +150,7 @@ class RouterTest extends Test
 
 
         $routeCollection->addController(
-            \Controller\RequirementsController::class
+            RequirementsController::class
         );
 
 
@@ -160,11 +160,11 @@ class RouterTest extends Test
 
 
         try {
-            $match = $router->handle($url, "GET");
+            $match = $router->handle($example["url"], "GET");
 
-            $this->assertTrue($shouldPass);
+            $I->assertTrue($example["shouldPass"]);
         } catch (RouteNotFoundException $e) {
-            $this->assertFalse($shouldPass);
+            $I->assertFalse($example["shouldPass"]);
         }
     }
 
@@ -188,14 +188,8 @@ class RouterTest extends Test
         ];
     }
 
-    public function testRouteNotFoundException()
+    public function testRouteNotFoundException(UnitTester $I)
     {
-        $this->expectException(
-            RouteNotFoundException::class
-        );
-
-
-
         $container = new Container();
 
         $resolver = new Resolver($container);
@@ -210,10 +204,17 @@ class RouterTest extends Test
 
         $router = new Router($resolver, $routeCollection);
 
-        $router->handle("/this/is/a/route/that/doesnt/exist", "GET");
+
+
+        $I->expectException(
+            RouteNotFoundException::class,
+            function () use ($router) {
+                $router->handle("/this/is/a/route/that/doesnt/exist", "GET");
+            }
+        );
     }
 
-    public function testHttpMethods()
+    public function testHttpMethods(UnitTester $I)
     {
         $container = new Container();
 
@@ -228,7 +229,7 @@ class RouterTest extends Test
 
 
         $routeCollection->addController(
-            \Controller\HttpMethodController::class
+            HttpMethodController::class
         );
 
 
@@ -239,7 +240,7 @@ class RouterTest extends Test
 
         $getMatch = $router->handle("/", "GET");
 
-        $this->assertEquals(
+        $I->assertEquals(
             "get",
             $getMatch->getPath()->getAction()
         );
@@ -248,13 +249,13 @@ class RouterTest extends Test
 
         $postMatch = $router->handle("/", "POST");
 
-        $this->assertEquals(
+        $I->assertEquals(
             "post",
             $postMatch->getPath()->getAction()
         );
     }
 
-    public function testGetRoutes()
+    public function testGetRoutes(UnitTester $I)
     {
         $container = new Container();
 
@@ -271,7 +272,7 @@ class RouterTest extends Test
         $router = new Router($resolver, $routeCollection);
 
 
-        $this->assertCount(
+        $I->assertCount(
             0,
             $routeCollection->getRoutes()
         );
@@ -279,10 +280,10 @@ class RouterTest extends Test
 
 
         $routeCollection->addController(
-            \Controller\IndexController::class
+            IndexController::class
         );
 
-        $this->assertCount(
+        $I->assertCount(
             1,
             $routeCollection->getRoutes()
         );
@@ -290,10 +291,10 @@ class RouterTest extends Test
 
 
         $routeCollection->addController(
-            \Controller\RequirementsController::class
+            RequirementsController::class
         );
 
-        $this->assertCount(
+        $I->assertCount(
             2,
             $routeCollection->getRoutes()
         );
@@ -303,7 +304,7 @@ class RouterTest extends Test
         $routes = $routeCollection->getRoutes();
 
         foreach ($routes as $route) {
-            $this->assertInstanceOf(
+            $I->assertInstanceOf(
                 Route::class,
                 $route
             );

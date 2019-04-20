@@ -1,25 +1,26 @@
 <?php
 
-namespace Sid\Framework\Test\Unit\Middleware;
+namespace Tests\Middleware;
 
-use Codeception\TestCase\Test;
-
+use Codeception\Example;
 use Sid\Framework\Dispatcher\Path;
 use Sid\Framework\Middleware\Runner;
 use Sid\Framework\Router\Route;
 use Sid\Framework\Router\Route\Uri;
+use Tests\UnitTester;
+use Tests\Controller\IndexController;
 
-class RunnerTest extends Test
+class RunnerCest
 {
-    public function testGetters()
+    public function testGetters(UnitTester $I)
     {
         $runner = new Runner();
 
-        $middleware = new \Middleware\ExampleTrue();
+        $middleware = new \Tests\Middleware\ExampleTrue();
 
 
 
-        $this->assertEquals(
+        $I->assertEquals(
             [],
             $runner->getMiddlewares()
         );
@@ -30,7 +31,7 @@ class RunnerTest extends Test
 
 
 
-        $this->assertEquals(
+        $I->assertEquals(
             [
                 $middleware
             ],
@@ -43,11 +44,11 @@ class RunnerTest extends Test
     /**
      * @dataProvider runProvider
      */
-    public function testRun(bool $expected, array $middlewares)
+    public function testRun(UnitTester $I, Example $example)
     {
         $runner = new Runner();
 
-        foreach ($middlewares as $middleware) {
+        foreach ($example["middlewares"] as $middleware) {
             $runner->addMiddleware($middleware);
         }
 
@@ -62,7 +63,7 @@ class RunnerTest extends Test
                 ]
             ),
             new Path(
-                \Controller\IndexController::class,
+                IndexController::class,
                 "index"
             )
         );
@@ -71,41 +72,44 @@ class RunnerTest extends Test
 
         $actual = $runner->run($uri, $route);
 
-        $this->assertEquals($expected, $actual);
+        $I->assertEquals(
+            $example["expected"],
+            $actual
+        );
     }
 
 
 
-    public function runProvider()
+    public function runProvider() : array
     {
         return [
             [
                 "expected"    => true,
                 "middlewares" => [
-                    new \Middleware\ExampleTrue(),
+                    new \Tests\Middleware\ExampleTrue(),
                 ],
             ],
 
             [
                 "expected"    => false,
                 "middlewares" => [
-                    new \Middleware\ExampleFalse(),
+                    new \Tests\Middleware\ExampleFalse(),
                 ],
             ],
 
             [
                 "expected"    => false,
                 "middlewares" => [
-                    new \Middleware\ExampleTrue(),
-                    new \Middleware\ExampleFalse(),
+                    new \Tests\Middleware\ExampleTrue(),
+                    new \Tests\Middleware\ExampleFalse(),
                 ],
             ],
 
             [
                 "expected"    => false,
                 "middlewares" => [
-                    new \Middleware\ExampleFalse(),
-                    new \Middleware\ExampleTrue(),
+                    new \Tests\Middleware\ExampleFalse(),
+                    new \Tests\Middleware\ExampleTrue(),
                 ],
             ],
         ];

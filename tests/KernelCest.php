@@ -1,28 +1,24 @@
 <?php
 
-namespace Sid\Framework\Test\Unit;
-
-use Codeception\TestCase\Test;
+namespace Tests;
 
 use Doctrine\Common\Annotations\AnnotationReader;
-
 use Sid\ContainerResolver\Resolver\Psr11 as Resolver;
-
 use Sid\Framework\Kernel;
 use Sid\Framework\Dispatcher;
 use Sid\Framework\Dispatcher\Path;
 use Sid\Framework\Router;
 use Sid\Framework\Router\Exception\RouteNotFoundException;
 use Sid\Framework\Router\RouteCollection;
-
 use Symfony\Component\DependencyInjection\Container;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Tests\Controller\ErrorController;
+use Tests\Controller\IndexController;
 
-class KernelTest extends Test
+class KernelCest
 {
-    public function testBasicHandle()
+    public function testBasicHandle(UnitTester $I)
     {
         $container = new Container();
 
@@ -37,7 +33,7 @@ class KernelTest extends Test
 
 
         $routeCollection->addController(
-            \Controller\IndexController::class
+            IndexController::class
         );
 
 
@@ -58,13 +54,13 @@ class KernelTest extends Test
 
         $response = $kernel->handle($request);
 
-        $this->assertEquals(
+        $I->assertEquals(
             "homepage",
             $response->getContent()
         );
     }
 
-    public function testGetAndSetNotFoundPath()
+    public function testGetAndSetNotFoundPath(UnitTester $I)
     {
         $container = new Container();
 
@@ -79,7 +75,7 @@ class KernelTest extends Test
 
 
         $routeCollection->addController(
-            \Controller\ErrorController::class
+            ErrorController::class
         );
 
 
@@ -92,13 +88,13 @@ class KernelTest extends Test
 
 
         $notFoundPath = new Path(
-            \Controller\ErrorController::class,
+            ErrorController::class,
             "notFound"
         );
 
 
 
-        $this->assertNull(
+        $I->assertNull(
             $kernel->getNotFoundPath()
         );
 
@@ -106,13 +102,13 @@ class KernelTest extends Test
             $notFoundPath
         );
 
-        $this->assertEquals(
+        $I->assertEquals(
             $notFoundPath,
             $kernel->getNotFoundPath()
         );
     }
 
-    public function testNotFoundPath()
+    public function testNotFoundPath(UnitTester $I)
     {
         $container = new Container();
 
@@ -134,7 +130,7 @@ class KernelTest extends Test
 
 
         $notFoundPath = new Path(
-            \Controller\ErrorController::class,
+            ErrorController::class,
             "notFound"
         );
 
@@ -153,20 +149,14 @@ class KernelTest extends Test
 
 
 
-        $this->assertEquals(
+        $I->assertEquals(
             "not found",
             $response->getContent()
         );
     }
 
-    public function testRouteNotFoundException()
+    public function testRouteNotFoundException(UnitTester $I)
     {
-        $this->expectException(
-            RouteNotFoundException::class
-        );
-
-
-
         $container = new Container();
 
         $resolver = new Resolver($container);
@@ -186,11 +176,16 @@ class KernelTest extends Test
 
 
 
-        $request = Request::create(
-            "/this/route/does/not/exist",
-            "GET"
-        );
+        $I->expectException(
+            RouteNotFoundException::class,
+            function () use ($kernel) {
+                $request = Request::create(
+                    "/this/route/does/not/exist",
+                    "GET"
+                );
 
-        $response = $kernel->handle($request);
+                $response = $kernel->handle($request);
+            }
+        );
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Tests\Controller;
 
 use Sid\Framework\Controller;
 use Sid\Framework\Parameters;
