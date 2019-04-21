@@ -12,7 +12,7 @@ use Tests\Controller\MathController;
 
 class DispatcherCest
 {
-    public function testSimpleDispatch(UnitTester $I)
+    public function simpleDispatch(UnitTester $I)
     {
         $container = new Container();
 
@@ -40,7 +40,7 @@ class DispatcherCest
         );
     }
 
-    public function testParams(UnitTester $I)
+    public function params(UnitTester $I)
     {
         $container = new Container();
 

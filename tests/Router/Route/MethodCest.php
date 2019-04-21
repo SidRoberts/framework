@@ -8,7 +8,7 @@ use Tests\UnitTester;
 
 class MethodCest
 {
-    public function testGetters(UnitTester $I)
+    public function getters(UnitTester $I)
     {
         $method = "POST";
 
@@ -26,7 +26,7 @@ class MethodCest
         );
     }
 
-    public function testEmptyAnnotation(UnitTester $I)
+    public function emptyAnnotation(UnitTester $I)
     {
         $I->expectException(
             InvalidArgumentException::class,

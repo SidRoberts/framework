@@ -9,7 +9,7 @@ use Tests\UnitTester;
 
 class MiddlewaresCest
 {
-    public function testBadMiddleware(UnitTester $I)
+    public function badMiddleware(UnitTester $I)
     {
         $I->expectException(
             InvalidArgumentException::class,

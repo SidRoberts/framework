@@ -10,7 +10,7 @@ use Tests\Controller\IndexController;
 
 class PathCest
 {
-    public function testGetters(UnitTester $I)
+    public function getters(UnitTester $I)
     {
         $controller = IndexController::class;
         $action     = "index";
@@ -35,7 +35,7 @@ class PathCest
         );
     }
 
-    public function testControllerNotFoundException(UnitTester $I)
+    public function controllerNotFoundException(UnitTester $I)
     {
         $I->expectException(
             ControllerNotFoundException::class,
@@ -51,7 +51,7 @@ class PathCest
         );
     }
 
-    public function testActionNotFoundException(UnitTester $I)
+    public function actionNotFoundException(UnitTester $I)
     {
         $I->expectException(
             ActionNotFoundException::class,

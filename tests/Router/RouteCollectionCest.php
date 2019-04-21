@@ -13,7 +13,7 @@ use Tests\Controller\ParametersController;
 
 class RouteCollectionCest
 {
-    public function testAddController(UnitTester $I)
+    public function addController(UnitTester $I)
     {
         $annotations = new AnnotationReader();
 
@@ -43,7 +43,7 @@ class RouteCollectionCest
         );
     }
 
-    public function testAddControllers(UnitTester $I)
+    public function addControllers(UnitTester $I)
     {
         $annotations = new AnnotationReader();
 
@@ -67,7 +67,7 @@ class RouteCollectionCest
         );
     }
 
-    public function testControllerNotFoundException(UnitTester $I)
+    public function controllerNotFoundException(UnitTester $I)
     {
         $annotations = new AnnotationReader();
 
@@ -85,7 +85,7 @@ class RouteCollectionCest
         );
     }
 
-    public function testNotAControllerException(UnitTester $I)
+    public function notAControllerException(UnitTester $I)
     {
         $annotations = new AnnotationReader();
 

@@ -18,7 +18,7 @@ use Tests\Controller\IndexController;
 
 class KernelCest
 {
-    public function testBasicHandle(UnitTester $I)
+    public function basicHandle(UnitTester $I)
     {
         $container = new Container();
 
@@ -60,7 +60,7 @@ class KernelCest
         );
     }
 
-    public function testGetAndSetNotFoundPath(UnitTester $I)
+    public function getAndSetNotFoundPath(UnitTester $I)
     {
         $container = new Container();
 
@@ -108,7 +108,7 @@ class KernelCest
         );
     }
 
-    public function testNotFoundPath(UnitTester $I)
+    public function notFoundPath(UnitTester $I)
     {
         $container = new Container();
 
@@ -155,7 +155,7 @@ class KernelCest
         );
     }
 
-    public function testRouteNotFoundException(UnitTester $I)
+    public function routeNotFoundException(UnitTester $I)
     {
         $container = new Container();
 

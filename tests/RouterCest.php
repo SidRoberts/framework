@@ -19,7 +19,7 @@ use Tests\Controller\RequirementsController;
 
 class RouterCest
 {
-    public function testGetRouteCollection(UnitTester $I)
+    public function getRouteCollection(UnitTester $I)
     {
         $container = new Container();
 
@@ -41,7 +41,7 @@ class RouterCest
         );
     }
 
-    public function testConverters(UnitTester $I)
+    public function converters(UnitTester $I)
     {
         $container = new Container();
 
@@ -74,7 +74,7 @@ class RouterCest
     /**
      * @dataProvider middlewaresProvider
      */
-    public function testMiddlewares(UnitTester $I, Example $example)
+    public function middlewares(UnitTester $I, Example $example)
     {
         $container = new Container();
 
@@ -135,7 +135,7 @@ class RouterCest
     /**
      * @dataProvider requirementsProvider
      */
-    public function testRequirements(UnitTester $I, Example $example)
+    public function requirements(UnitTester $I, Example $example)
     {
         $container = new Container();
 
@@ -188,7 +188,7 @@ class RouterCest
         ];
     }
 
-    public function testRouteNotFoundException(UnitTester $I)
+    public function routeNotFoundException(UnitTester $I)
     {
         $container = new Container();
 
@@ -214,7 +214,7 @@ class RouterCest
         );
     }
 
-    public function testHttpMethods(UnitTester $I)
+    public function httpMethods(UnitTester $I)
     {
         $container = new Container();
 
@@ -255,7 +255,7 @@ class RouterCest
         );
     }
 
-    public function testGetRoutes(UnitTester $I)
+    public function getRoutes(UnitTester $I)
     {
         $container = new Container();
 

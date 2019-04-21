@@ -12,7 +12,7 @@ use Tests\Controller\IndexController;
 
 class RunnerCest
 {
-    public function testGetters(UnitTester $I)
+    public function getters(UnitTester $I)
     {
         $runner = new Runner();
 
@@ -44,7 +44,7 @@ class RunnerCest
     /**
      * @dataProvider runProvider
      */
-    public function testRun(UnitTester $I, Example $example)
+    public function run(UnitTester $I, Example $example)
     {
         $runner = new Runner();
 

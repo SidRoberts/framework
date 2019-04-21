@@ -10,7 +10,7 @@ use Tests\UnitTester;
 
 class ConvertersCest
 {
-    public function testBadConverter(UnitTester $I)
+    public function badConverter(UnitTester $I)
     {
         $I->expectException(
             InvalidArgumentException::class,
@@ -24,7 +24,7 @@ class ConvertersCest
         );
     }
 
-    public function testImmutabilitySet(UnitTester $I)
+    public function immutabilitySet(UnitTester $I)
     {
         $converters = new Converters(
             []
@@ -38,7 +38,7 @@ class ConvertersCest
         );
     }
 
-    public function testImmutabilityUnset(UnitTester $I)
+    public function immutabilityUnset(UnitTester $I)
     {
         $converters = new Converters(
             []

@@ -8,7 +8,7 @@ use Tests\UnitTester;
 
 class UriCest
 {
-    public function testGetters(UnitTester $I)
+    public function getters(UnitTester $I)
     {
         $uri = "/{a}/{b}";
 
@@ -26,7 +26,7 @@ class UriCest
         );
     }
 
-    public function testEmptyAnnotation(UnitTester $I)
+    public function emptyAnnotation(UnitTester $I)
     {
         $I->expectException(
             InvalidArgumentException::class,
