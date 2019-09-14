@@ -33,7 +33,7 @@ class RunnerCest
 
         $I->assertEquals(
             [
-                $middleware
+                $middleware,
             ],
             $runner->getMiddlewares()
         );

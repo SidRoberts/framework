@@ -18,7 +18,7 @@ class MiddlewaresCest
                     [
                         "value" => [
                             Router::class,
-                        ]
+                        ],
                     ]
                 );
             }
