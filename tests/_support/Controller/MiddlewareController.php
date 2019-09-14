@@ -3,9 +3,8 @@
 namespace Tests\Controller;
 
 use Sid\Framework\Controller;
-
-use Sid\Framework\Router\Route\Uri;
 use Sid\Framework\Router\Route\Middlewares;
+use Sid\Framework\Router\Route\Uri;
 
 class MiddlewareController extends Controller
 {

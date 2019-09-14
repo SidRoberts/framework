@@ -2,8 +2,8 @@
 
 namespace Sid\Framework\Dispatcher;
 
-use Sid\Framework\Dispatcher\Exception\ControllerNotFoundException;
 use Sid\Framework\Dispatcher\Exception\ActionNotFoundException;
+use Sid\Framework\Dispatcher\Exception\ControllerNotFoundException;
 
 class Path
 {

@@ -2,8 +2,8 @@
 
 namespace Tests\Middleware;
 
-use Sid\Framework\Router\Route;
 use Sid\Framework\MiddlewareInterface;
+use Sid\Framework\Router\Route;
 
 class ExampleFalse implements MiddlewareInterface
 {

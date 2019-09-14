@@ -3,11 +3,8 @@
 namespace Sid\Framework\Router\Route;
 
 use ArrayAccess;
-
 use InvalidArgumentException;
-
 use LogicException;
-
 use Sid\Framework\ConverterInterface;
 
 /**

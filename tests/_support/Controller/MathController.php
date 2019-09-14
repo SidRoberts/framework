@@ -4,8 +4,8 @@ namespace Tests\Controller;
 
 use Sid\Framework\Controller;
 use Sid\Framework\Parameters;
-use Sid\Framework\Router\Route\Uri;
 use Sid\Framework\Router\Route\Requirements;
+use Sid\Framework\Router\Route\Uri;
 
 class MathController extends Controller
 {

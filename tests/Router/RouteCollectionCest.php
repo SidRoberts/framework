@@ -7,9 +7,9 @@ use Sid\Framework\Router;
 use Sid\Framework\Router\Exception\ControllerNotFoundException;
 use Sid\Framework\Router\Exception\NotAControllerException;
 use Sid\Framework\Router\RouteCollection;
-use Tests\UnitTester;
 use Tests\Controller\IndexController;
 use Tests\Controller\ParametersController;
+use Tests\UnitTester;
 
 class RouteCollectionCest
 {

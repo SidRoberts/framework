@@ -3,7 +3,6 @@
 namespace Sid\Framework;
 
 use Sid\Framework\Dispatcher\Path;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

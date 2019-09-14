@@ -2,12 +2,12 @@
 
 namespace Sid\Framework\Router;
 
-use Sid\Framework\Router\Route\Uri;
-use Sid\Framework\Router\Route\Method;
-use Sid\Framework\Router\Route\Requirements;
-use Sid\Framework\Router\Route\Middlewares;
-use Sid\Framework\Router\Route\Converters;
 use Sid\Framework\Dispatcher\Path;
+use Sid\Framework\Router\Route\Converters;
+use Sid\Framework\Router\Route\Method;
+use Sid\Framework\Router\Route\Middlewares;
+use Sid\Framework\Router\Route\Requirements;
+use Sid\Framework\Router\Route\Uri;
 
 class Route
 {

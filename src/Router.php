@@ -3,9 +3,7 @@
 namespace Sid\Framework;
 
 use Sid\ContainerResolver\ResolverInterface;
-
 use Sid\Framework\Middleware\Runner as MiddlewareRunner;
-
 use Sid\Framework\Router\Exception\RouteNotFoundException;
 use Sid\Framework\Router\Match;
 use Sid\Framework\Router\Route;

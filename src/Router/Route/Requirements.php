@@ -2,8 +2,6 @@
 
 namespace Sid\Framework\Router\Route;
 
-use InvalidArgumentException;
-
 /**
  * @Annotation
  */

@@ -5,8 +5,8 @@ namespace Tests\Controller;
 use InvalidArgumentException;
 use Sid\Framework\Controller;
 use Sid\Framework\Parameters;
-use Sid\Framework\Router\Route\Uri;
 use Sid\Framework\Router\Route\Requirements;
+use Sid\Framework\Router\Route\Uri;
 
 class RequirementsController extends Controller
 {

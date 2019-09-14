@@ -10,7 +10,6 @@ use Sid\Framework\Router\Exception\RouteNotFoundException;
 use Sid\Framework\Router\Route;
 use Sid\Framework\Router\RouteCollection;
 use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\HttpFoundation\Request;
 use Tests\Controller\ConverterController;
 use Tests\Controller\HttpMethodController;
 use Tests\Controller\IndexController;

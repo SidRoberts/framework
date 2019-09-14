@@ -2,11 +2,11 @@
 
 namespace Tests\Dispatcher;
 
-use Sid\Framework\Dispatcher\Path;
-use Sid\Framework\Dispatcher\Exception\ControllerNotFoundException;
 use Sid\Framework\Dispatcher\Exception\ActionNotFoundException;
-use Tests\UnitTester;
+use Sid\Framework\Dispatcher\Exception\ControllerNotFoundException;
+use Sid\Framework\Dispatcher\Path;
 use Tests\Controller\IndexController;
+use Tests\UnitTester;
 
 class PathCest
 {

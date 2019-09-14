@@ -7,8 +7,8 @@ use Sid\Framework\Dispatcher\Path;
 use Sid\Framework\Middleware\Runner;
 use Sid\Framework\Router\Route;
 use Sid\Framework\Router\Route\Uri;
-use Tests\UnitTester;
 use Tests\Controller\IndexController;
+use Tests\UnitTester;
 
 class RunnerCest
 {

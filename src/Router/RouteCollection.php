@@ -2,21 +2,17 @@
 
 namespace Sid\Framework\Router;
 
-use ReflectionClass;
 use ReflectionMethod;
-
 use Sid\Framework\ControllerInterface;
-
 use Sid\Framework\Dispatcher\Path;
-
 use Sid\Framework\Router\Exception\ControllerNotFoundException;
 use Sid\Framework\Router\Exception\NotAControllerException;
 use Sid\Framework\Router\Exception\NotAnActionMethodException;
-use Sid\Framework\Router\Route\Uri;
-use Sid\Framework\Router\Route\Method;
-use Sid\Framework\Router\Route\Requirements;
-use Sid\Framework\Router\Route\Middlewares;
 use Sid\Framework\Router\Route\Converters;
+use Sid\Framework\Router\Route\Method;
+use Sid\Framework\Router\Route\Middlewares;
+use Sid\Framework\Router\Route\Requirements;
+use Sid\Framework\Router\Route\Uri;
 
 class RouteCollection
 {

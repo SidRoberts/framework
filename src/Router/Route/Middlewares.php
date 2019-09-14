@@ -3,9 +3,7 @@
 namespace Sid\Framework\Router\Route;
 
 use InvalidArgumentException;
-
 use Iterator;
-
 use Sid\Framework\MiddlewareInterface;
 
 /**

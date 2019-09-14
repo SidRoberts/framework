@@ -4,15 +4,14 @@ namespace Tests;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Sid\ContainerResolver\Resolver\Psr11 as Resolver;
-use Sid\Framework\Kernel;
 use Sid\Framework\Dispatcher;
 use Sid\Framework\Dispatcher\Path;
+use Sid\Framework\Kernel;
 use Sid\Framework\Router;
 use Sid\Framework\Router\Exception\RouteNotFoundException;
 use Sid\Framework\Router\RouteCollection;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\Controller\ErrorController;
 use Tests\Controller\IndexController;
 

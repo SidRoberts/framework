@@ -4,7 +4,6 @@ namespace Tests\Controller;
 
 use Sid\Framework\Controller;
 use Sid\Framework\Router\Route\Uri;
-
 use Symfony\Component\HttpFoundation\Response;
 
 class ErrorController extends Controller
