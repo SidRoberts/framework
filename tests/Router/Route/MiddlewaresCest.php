@@ -11,7 +11,7 @@ class MiddlewaresCest
 {
     public function badMiddleware(UnitTester $I)
     {
-        $I->expectException(
+        $I->expectThrowable(
             InvalidArgumentException::class,
             function () {
                 $middlewares = new Middlewares(

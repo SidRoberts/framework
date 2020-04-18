@@ -12,7 +12,7 @@ class ConvertersCest
 {
     public function badConverter(UnitTester $I)
     {
-        $I->expectException(
+        $I->expectThrowable(
             InvalidArgumentException::class,
             function () {
                 $converters = new Converters(
@@ -30,7 +30,7 @@ class ConvertersCest
             []
         );
 
-        $I->expectException(
+        $I->expectThrowable(
             LogicException::class,
             function () use ($converters) {
                 $converters["example"] = null;
@@ -44,7 +44,7 @@ class ConvertersCest
             []
         );
 
-        $I->expectException(
+        $I->expectThrowable(
             LogicException::class,
             function () use ($converters) {
                 unset($converters["example"]);

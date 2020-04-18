@@ -37,7 +37,7 @@ class PathCest
 
     public function controllerNotFoundException(UnitTester $I)
     {
-        $I->expectException(
+        $I->expectThrowable(
             ControllerNotFoundException::class,
             function () {
                 $controller = "FakeController";
@@ -53,7 +53,7 @@ class PathCest
 
     public function actionNotFoundException(UnitTester $I)
     {
-        $I->expectException(
+        $I->expectThrowable(
             ActionNotFoundException::class,
             function () {
                 $controller = IndexController::class;

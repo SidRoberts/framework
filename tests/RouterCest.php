@@ -205,7 +205,7 @@ class RouterCest
 
 
 
-        $I->expectException(
+        $I->expectThrowable(
             RouteNotFoundException::class,
             function () use ($router) {
                 $router->handle("/this/is/a/route/that/doesnt/exist", "GET");

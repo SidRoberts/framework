@@ -28,7 +28,7 @@ class MethodCest
 
     public function emptyAnnotation(UnitTester $I)
     {
-        $I->expectException(
+        $I->expectThrowable(
             InvalidArgumentException::class,
             function () {
                 $method = new Method(

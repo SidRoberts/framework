@@ -28,7 +28,7 @@ class UriCest
 
     public function emptyAnnotation(UnitTester $I)
     {
-        $I->expectException(
+        $I->expectThrowable(
             InvalidArgumentException::class,
             function () {
                 $uri = new Uri(

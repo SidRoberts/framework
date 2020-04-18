@@ -75,7 +75,7 @@ class RouteCollectionCest
 
 
 
-        $I->expectException(
+        $I->expectThrowable(
             ControllerNotFoundException::class,
             function () use ($routeCollection) {
                 $routeCollection->addController(
@@ -93,7 +93,7 @@ class RouteCollectionCest
 
 
 
-        $I->expectException(
+        $I->expectThrowable(
             NotAControllerException::class,
             function () use ($routeCollection) {
                 $routeCollection->addController(

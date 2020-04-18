@@ -175,7 +175,7 @@ class KernelCest
 
 
 
-        $I->expectException(
+        $I->expectThrowable(
             RouteNotFoundException::class,
             function () use ($kernel) {
                 $request = Request::create(
