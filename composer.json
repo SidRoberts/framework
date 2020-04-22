@@ -34,9 +34,7 @@
 
         "doctrine/annotations": "~1.6",
 
-        "symfony/http-foundation": "~3.4 || ~4.0",
-
-        "twig/twig": "~2.0"
+        "symfony/http-foundation": "~3.4 || ~4.0"
     },
 
     "require-dev": {
