@@ -102,7 +102,6 @@ class Route
 
 
 
-
     protected function createCompiledPattern()
     {
         $pattern = $this->getUri()->getUri();
